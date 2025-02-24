@@ -1,8 +1,13 @@
 package com.cooksys.project_manager.repositories;
 
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-@Repository
-public class CompanyRepository {
-    
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.cooksys.project_manager.entities.Company;
+import com.cooksys.project_manager.entities.User;
+
+public interface CompanyRepository extends JpaRepository<Company, Long>{
+
+    List<User> findAllByIdAndDeletedFalse(Long id);
 }
