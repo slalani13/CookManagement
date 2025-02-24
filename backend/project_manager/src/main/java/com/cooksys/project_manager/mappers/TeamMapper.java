@@ -1,8 +1,11 @@
 package com.cooksys.project_manager.mappers;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 
 import com.cooksys.project_manager.dtos.TeamRequestDto;
+import com.cooksys.project_manager.dtos.TeamResponseDto;
 import com.cooksys.project_manager.entities.Team;
 
 
@@ -12,6 +15,8 @@ public interface TeamMapper {
 
     Team requestDtoToEntity(TeamRequestDto teamRequestDto);
 
-    TeamRequestDto entityToReqDto(Team team);
+    TeamResponseDto entityToResponseDto(Team team);
+
+    List<TeamResponseDto> entitiesToDtos(List<Team> entities);
     
 }
