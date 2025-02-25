@@ -29,7 +29,7 @@ public class AnnouncementController {
     }
 
     @PostMapping("/announcement")
-    public AnnouncementResponseDto createAnnouncement(@PathVariable Long companyId, @PathVariable Long authorId, @RequestBody AnnouncementRequestDto announcementRequestDto) {
+    public AnnouncementResponseDto createAnnouncement(@RequestBody AnnouncementRequestDto announcementRequestDto) {
         return announcementService.createAnnouncement(announcementRequestDto);
     }
 
