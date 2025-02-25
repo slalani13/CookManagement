@@ -1,5 +1,6 @@
 package com.cooksys.project_manager.controllers;
 
+import com.cooksys.project_manager.dtos.CredentialsDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +26,8 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserResponseDto userLogin() {
-        return null;
+    public UserResponseDto userLogin(@RequestBody CredentialsDto credentialsDto) {
+        return userService.activateUser(credentialsDto);
     }
 
     @GetMapping
