@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-
 public class TeamResponseDto {
 
     private Long id;
