@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cooksys.project_manager.dtos.ProjectRequestDto;
 import com.cooksys.project_manager.dtos.ProjectResponseDto;
 import com.cooksys.project_manager.services.ProjectService;
 
@@ -22,7 +24,7 @@ public class ProjectController {
 
     @GetMapping("/{id}/teams/{id}/projects")
     public List<ProjectResponseDto> getProjects() {
-        return null;
+        return projectService.getAllProjects();
     }
 
     @GetMapping
@@ -31,8 +33,8 @@ public class ProjectController {
     }
 
     @PostMapping("/project")
-    public ProjectResponseDto createProject() {
-        return null;
+    public ProjectResponseDto createProject(@RequestBody ProjectRequestDto projectRequestDto) {
+        return projectService.createProject(projectRequestDto);
     }
 
     @PatchMapping("/project/update")

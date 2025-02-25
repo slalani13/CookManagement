@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cooksys.project_manager.dtos.TeamRequestDto;
 import com.cooksys.project_manager.dtos.TeamResponseDto;
 import com.cooksys.project_manager.services.TeamService;
 
@@ -22,7 +24,7 @@ public class TeamController {
 
     @GetMapping("/{id}/teams")
     public List<TeamResponseDto> getTeams() {
-        return null;
+        return teamService.getAllTeams();
     }
     
     @GetMapping
@@ -31,8 +33,8 @@ public class TeamController {
     }
 
     @PostMapping("/team")
-    public TeamResponseDto createTeam() {
-        return null;
+    public TeamResponseDto createTeam(@RequestBody TeamRequestDto teamRequestDto) {
+        return teamService.createTeam(teamRequestDto);
     }
 
     @PatchMapping("/team/update")

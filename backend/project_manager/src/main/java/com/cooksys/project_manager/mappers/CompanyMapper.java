@@ -5,6 +5,7 @@ import java.util.List;
 import org.mapstruct.Mapper;
 
 import com.cooksys.project_manager.dtos.CompanyRequestDto;
+import com.cooksys.project_manager.dtos.CompanyResponseDto;
 import com.cooksys.project_manager.dtos.UserResponseDto;
 import com.cooksys.project_manager.entities.Company;
 import com.cooksys.project_manager.entities.User;
@@ -16,6 +17,8 @@ import com.cooksys.project_manager.entities.User;
 public interface CompanyMapper {
     
     Company requestDtoToEntity(CompanyRequestDto companyRequestDto);
+
+    Company responseDtoToEntity(CompanyResponseDto companyResponseDto);
 
     CompanyRequestDto entityToReqDto(Company company);
 
