@@ -12,6 +12,7 @@ public interface ProjectService {
     ProjectResponseDto createProject(ProjectRequestDto projectRequestDto, CredentialsDto credentialsDto);
     ProjectResponseDto updateProject(Long project_id, ProjectRequestDto projectRequestDto, CredentialsDto credentialsDto);
     ProjectResponseDto getProject(Long project_id);
+    String fullyDeleteProject(Long project_id, CredentialsDto credentialsDto);
     List<ProjectResponseDto> getCompanyProjectsOfTeam(Long team_id);
 
 

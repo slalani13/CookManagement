@@ -13,6 +13,7 @@ import com.cooksys.project_manager.entities.Team;
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Long>{
 
+    List<Team> findAllByIsDeletedFalse();
     Optional<Team> findByIdAndIsDeletedFalse(Long id);
     
 }
