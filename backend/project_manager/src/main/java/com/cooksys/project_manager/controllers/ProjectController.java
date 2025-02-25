@@ -40,9 +40,9 @@ public class ProjectController {
         return projectService.getProject(project_id);
     }
 
-    @PostMapping
-    public ProjectResponseDto createProject(@RequestBody ProjectRequestDto projectRequestDto, @RequestBody CredentialsDto credentialsDto) {
-        return projectService.createProject(projectRequestDto, credentialsDto);
+    @PostMapping("/teams/{team_id}")
+    public ProjectResponseDto createProject(@PathVariable Long team_id, @RequestBody ProjectRequestDto projectRequestDto, @RequestBody CredentialsDto credentialsDto) {
+        return projectService.createProject(team_id, projectRequestDto, credentialsDto);
     }
 
     @PatchMapping("/{project_id}")

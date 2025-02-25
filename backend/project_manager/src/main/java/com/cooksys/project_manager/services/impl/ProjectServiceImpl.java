@@ -79,13 +79,16 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectResponseDto createProject(ProjectRequestDto projectRequestDto, CredentialsDto credentialsDto) {
+    public ProjectResponseDto createProject(Long team_id, ProjectRequestDto projectRequestDto, CredentialsDto credentialsDto) {
         hasPermission(credentialsDto);
+        Team currTeam = getTeamWithId(team_id);
         Project newProject = projectRepository.save(projectMapper.requestDtoToEntity(projectRequestDto));
         newProject.setActive(false);
         newProject.setName(projectRequestDto.getName());
         newProject.setDescription(projectRequestDto.getDescription());
         newProject.setTeam(teamMapper.responseDtoToEntity(projectRequestDto.getTeam()));
+        currTeam.getProjects().add(newProject);
+        teamRepository.save(currTeam);
         return projectMapper.entityToResponseDto(projectRepository.save(newProject));
     }
 
@@ -93,7 +96,8 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectResponseDto updateProject(Long project_id, ProjectRequestDto projectRequestDto,
             CredentialsDto credentialsDto) {
         
-        Project currProject = validateProjectWithId(project_id, credentialsDto);
+        hasPermission(credentialsDto);
+        Project currProject = getProjectWithId(project_id);
 
         // checking individual fields if they are null, do not replace a non-null field with a null field'
         if (projectRequestDto.getName() != null){
@@ -102,9 +106,6 @@ public class ProjectServiceImpl implements ProjectService {
         if (projectRequestDto.getDescription() != null){
             currProject.setDescription(projectRequestDto.getDescription());
         }
-        if (projectRequestDto.getTeam() != null){
-            currProject.setTeam(teamMapper.responseDtoToEntity(projectRequestDto.getTeam()));
-        } 
         currProject.setActive(projectRequestDto.isActive());
     
         return projectMapper.entityToResponseDto(projectRepository.save(currProject));
