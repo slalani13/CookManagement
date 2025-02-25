@@ -2,13 +2,13 @@ package com.cooksys.project_manager.mappers;
 
 import org.mapstruct.Mapper;
 
-import com.cooksys.project_manager.dtos.CredentialsRequestDto;
-import com.cooksys.project_manager.embeddables.Credentials;
+import com.cooksys.project_manager.dtos.CredentialsDto;
+import com.cooksys.project_manager.entities.Credentials;
 
 @Mapper(componentModel = "spring")
 public interface CredentialsMapper {
   
-    Credentials requestDtoToEntity(CredentialsRequestDto credentialsRequestDto);
+    Credentials requestDtoToEntity(CredentialsDto credentialsRequestDto);
 
-    CredentialsRequestDto entityToReqDto(Credentials credentials);
+    CredentialsDto entityToReqDto(Credentials credentials);
 }

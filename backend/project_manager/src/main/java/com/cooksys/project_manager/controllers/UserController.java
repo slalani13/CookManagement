@@ -1,10 +1,8 @@
 package com.cooksys.project_manager.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.cooksys.project_manager.dtos.UserRequestDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import com.cooksys.project_manager.dtos.AnnouncementResponseDto;
 import com.cooksys.project_manager.dtos.UserResponseDto;
@@ -20,6 +18,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/login")
+    @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDto userLogin() {
         return null;
     }
@@ -30,9 +29,11 @@ public class UserController {
     }
 
     @PostMapping
-    public UserResponseDto createUser() {
-        return null;
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserResponseDto createUser(@RequestBody UserRequestDto userRequestDto) {
+        return userService.createUser(userRequestDto);
     }
+
 
     @PatchMapping("/update")
     public UserResponseDto updateProfile() {

@@ -1,4 +1,4 @@
-package com.cooksys.project_manager.embeddables;
+package com.cooksys.project_manager.entities;
 
 import jakarta.persistence.Embeddable;
 import lombok.Data;

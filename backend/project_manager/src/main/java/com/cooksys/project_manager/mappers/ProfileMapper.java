@@ -1,14 +1,14 @@
 package com.cooksys.project_manager.mappers;
 
+import com.cooksys.project_manager.dtos.ProfileDto;
 import org.mapstruct.Mapper;
 
-import com.cooksys.project_manager.dtos.ProfileRequestDto;
-import com.cooksys.project_manager.embeddables.Profile;
+import com.cooksys.project_manager.entities.Profile;
 
 @Mapper(componentModel = "spring")
 public interface ProfileMapper {
   
-    Profile requestDtoToEntity(ProfileRequestDto profileRequestDto);
+    Profile requestDtoToEntity(ProfileDto profileRequestDto);
 
-    ProfileRequestDto entityToReqDto(Profile profile);
+    ProfileDto entityToReqDto(Profile profile);
 }

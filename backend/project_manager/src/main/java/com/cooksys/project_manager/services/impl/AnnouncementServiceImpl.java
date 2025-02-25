@@ -32,8 +32,8 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         }
 
         Company company = optionalCompany.get();
-
-        List<Announcement> announcements = announcementRepository.findByCompanyAndDeletedFalse(company);
+        List<Announcement> announcements = announcementRepository.findByCompany(company);
+//        List<Announcement> announcements = announcementRepository.findByCompanyAndDeletedFalse(company);
         return announcements.stream()
                 .map(announcementMapper::entityToResponseDto)
                 .toList();

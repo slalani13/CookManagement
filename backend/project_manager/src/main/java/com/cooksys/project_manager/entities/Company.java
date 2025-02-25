@@ -23,6 +23,9 @@ public class Company {
 
     private String description;
 
+    // added boolean deleted due to errors, not sure if needed
+    private boolean deleted;
+
     @OneToMany(mappedBy = "company")
     private List<Team> teams;
 
