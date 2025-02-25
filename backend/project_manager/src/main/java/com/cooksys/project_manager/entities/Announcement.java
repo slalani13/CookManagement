@@ -15,4 +15,19 @@ public class Announcement {
     @Id
     @GeneratedValue
     private Long id;
+
+    private Timestamp date;
+
+    private String title;
+
+    private String message;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User author;
+
 }

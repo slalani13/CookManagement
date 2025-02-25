@@ -24,8 +24,8 @@ public class AnnouncementController {
     private final AnnouncementService announcementService;
 
     @GetMapping("/{id}/announcements")
-    public List<AnnouncementResponseDto> getAnnouncements() {
-        return null;
+    public List<AnnouncementResponseDto> getAnnouncements(@PathVariable Long id) {
+        return announcementService.getAnnouncementsByCompanyId(id);
     }
 
     @GetMapping
