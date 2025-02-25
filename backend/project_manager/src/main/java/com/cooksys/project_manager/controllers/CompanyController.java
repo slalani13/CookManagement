@@ -34,8 +34,8 @@ public class CompanyController {
         return null;
     }
 
-    @GetMapping
-    public CompanyResponseDto getCompany() {
+    @GetMapping("/{id}")
+    public CompanyResponseDto getCompany(@PathVariable long id) {
         return null;
     }
 

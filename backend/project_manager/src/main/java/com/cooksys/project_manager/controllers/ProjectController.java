@@ -2,12 +2,7 @@ package com.cooksys.project_manager.controllers;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.cooksys.project_manager.dtos.ProjectRequestDto;
 import com.cooksys.project_manager.dtos.ProjectResponseDto;
@@ -17,13 +12,13 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/company")
+@RequestMapping("/project")
 
 public class ProjectController {
     private final ProjectService projectService;
 
-    @GetMapping("/{id}/teams/{id}/projects")
-    public List<ProjectResponseDto> getProjects() {
+    @GetMapping("/{company_id}/teams/{team_id}/projects")
+    public List<ProjectResponseDto> getProjects(@PathVariable Long company_id, @PathVariable Long team_id) {
         return projectService.getAllProjects();
     }
 

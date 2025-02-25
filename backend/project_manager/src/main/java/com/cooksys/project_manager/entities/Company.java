@@ -2,10 +2,7 @@ package com.cooksys.project_manager.entities;
 
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,12 +21,16 @@ public class Company {
     private String description;
 
     // added boolean deleted due to errors, not sure if needed
-    private boolean deleted;
+    private boolean isDeleted;
 
     @OneToMany(mappedBy = "company")
     private List<Team> teams;
 
-    @OneToMany(mappedBy = "company")
+    @ManyToMany(mappedBy = "companies",
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
     private List<User> users;
 
     @OneToMany(mappedBy = "company")

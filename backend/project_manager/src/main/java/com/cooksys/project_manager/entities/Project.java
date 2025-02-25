@@ -21,7 +21,7 @@ public class Project {
 
     private String description;
 
-    private boolean active;
+    private boolean isActive;
 
     @ManyToOne
     @JoinColumn(name = "team_id")

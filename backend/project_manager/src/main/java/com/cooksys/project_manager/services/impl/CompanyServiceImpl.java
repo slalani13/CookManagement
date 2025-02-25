@@ -21,7 +21,7 @@ public class CompanyServiceImpl implements CompanyService{
     private final UserMapper userMapper;
 
     public List<UserResponseDto> getUsers(Long id) {
-        return userMapper.entitiesToDto(companyRepository.findAllByIdAndDeletedFalse(id));
+        return userMapper.entitiesToDto(companyRepository.findAllByIdAndIsDeletedFalse(id));
     } 
 
 }

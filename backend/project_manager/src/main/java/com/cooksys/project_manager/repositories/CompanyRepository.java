@@ -9,5 +9,5 @@ import com.cooksys.project_manager.entities.User;
 
 public interface CompanyRepository extends JpaRepository<Company, Long>{
 
-    List<User> findAllByIdAndDeletedFalse(Long id);
+    List<User> findAllByIdAndIsDeletedFalse(Long id);
 }

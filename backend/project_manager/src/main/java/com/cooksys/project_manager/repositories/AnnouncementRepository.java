@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface AnnouncementRepository extends JpaRepository<Announcement, Long>{
-//    List<Announcement> findByCompanyAndDeletedFalse(Company company);
+    List<Announcement> findByCompanyAndIsDeletedFalse(Company company);
 
     List<Announcement> findByCompany(Company company);
 

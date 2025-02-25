@@ -10,6 +10,6 @@ import com.cooksys.project_manager.entities.Project;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long>{
     
-  List<Project> findByAllByActive();
+  List<Project> findAllByIsActiveTrue();
   
 }

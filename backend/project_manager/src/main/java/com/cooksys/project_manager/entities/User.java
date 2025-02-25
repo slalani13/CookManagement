@@ -33,9 +33,13 @@ public class User {
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Announcement> announcements;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id", referencedColumnName = "id")
-    private Company company;
+    @ManyToMany
+    @JoinTable(
+            name = "user_company",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "company_id")
+    )
+    private List<Company> companies;
 
     @ManyToMany(mappedBy = "users")
     private List<Team> teams;

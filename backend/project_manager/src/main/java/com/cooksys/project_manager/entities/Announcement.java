@@ -25,7 +25,7 @@ public class Announcement {
 
     private String message;
 
-//    private boolean deleted;
+    private boolean isDeleted;
 
     @ManyToOne
     @JoinColumn(name = "company_id")

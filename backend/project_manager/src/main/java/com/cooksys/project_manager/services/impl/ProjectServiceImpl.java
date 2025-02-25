@@ -24,7 +24,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override   
     public List<ProjectResponseDto> getAllProjects() {
-        return projectMapper.entitiesToDtos(projectRepository.findByAllByActive());
+        return projectMapper.entitiesToDtos(projectRepository.findAllByIsActiveTrue());
     }
 
     @Override
