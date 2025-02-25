@@ -13,4 +13,5 @@ import com.cooksys.project_manager.entities.User;
 public interface UserRepository extends JpaRepository<User, Long>{
     Optional<User> findByCredentialsUsernameAndIsActiveTrue(String username);
     List<User> findAllByIdAndIsActiveFalse(Long id);
+    Optional<User> findByIdAndIsActiveTrue(Long id);
 }
