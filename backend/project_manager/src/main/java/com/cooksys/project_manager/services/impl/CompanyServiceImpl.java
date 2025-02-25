@@ -45,7 +45,7 @@ public class CompanyServiceImpl implements CompanyService{
     // an error should be sent in lieu of a response.
     @Override
     public List<UserResponseDto> getUsers(Long id) {
-        return userMapper.entitiesToDto(userRepository.findAllByIdAndIsDeletedFalse(id));
+        return userMapper.entitiesToDto(userRepository.findAllByIdAndIsActiveFalse(id));
     }
 
     @Override

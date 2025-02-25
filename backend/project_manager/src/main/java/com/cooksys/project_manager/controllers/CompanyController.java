@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cooksys.project_manager.dtos.AnnouncementResponseDto;
+import com.cooksys.project_manager.dtos.CompanyRequestDto;
 import com.cooksys.project_manager.dtos.CompanyResponseDto;
 import com.cooksys.project_manager.dtos.UserResponseDto;
 import com.cooksys.project_manager.services.CompanyService;
@@ -38,7 +39,7 @@ public class CompanyController {
 
     @GetMapping("/{id}")
     public CompanyResponseDto getCompany(@PathVariable Long id) {
-        return companyService.getCompany(id)
+        return companyService.getCompany(id);
     }
 
     @PostMapping
