@@ -1,24 +1,23 @@
 package com.cooksys.project_manager.controllers;
-import java.util.List;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cooksys.project_manager.dtos.UserResponseDto;
-import com.cooksys.project_manager.services.CompanyService;
+import com.cooksys.project_manager.services.UserService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/company")
+@RequestMapping("/users")
 
-public class CompanyController {
-    private final CompanyService companyService;
+public class UserController {
+    private final UserService userService;
 
-    @GetMapping("/{id}/users")
-    public List<UserResponseDto> getUsers() {
+    @PostMapping("/login")
+    public UserResponseDto userLogin() {
         return null;
     }
 }

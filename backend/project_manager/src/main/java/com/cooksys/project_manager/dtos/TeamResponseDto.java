@@ -1,6 +1,9 @@
 package com.cooksys.project_manager.dtos;
 
-import jakarta.persistence.Embedded;
+import java.util.List;
+
+import com.cooksys.project_manager.entities.User;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,8 +11,13 @@ import lombok.NoArgsConstructor;
 @Data
 
 public class TeamResponseDto {
-     @Embedded
-    private MetaDataRequestDto metaData;
 
-    private CompanyResponseDto company;
+    private Long id;
+    
+    private String name;
+
+    private String description;
+
+    private List<User> users;
+    
 }

@@ -6,9 +6,7 @@ import org.mapstruct.Mapper;
 
 import com.cooksys.project_manager.dtos.ProjectRequestDto;
 import com.cooksys.project_manager.dtos.ProjectResponseDto;
-import com.cooksys.project_manager.dtos.TeamResponseDto;
 import com.cooksys.project_manager.entities.Project;
-import com.cooksys.project_manager.entities.Team;
 
 @Mapper(componentModel = "spring")
 public interface ProjectMapper {

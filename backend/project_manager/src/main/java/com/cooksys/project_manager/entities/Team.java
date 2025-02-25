@@ -2,9 +2,6 @@ package com.cooksys.project_manager.entities;
 
 import java.util.List;
 
-import com.cooksys.project_manager.embeddables.MetaData;
-
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -24,8 +21,9 @@ public class Team {
     @GeneratedValue
     private Long id;
 
-    @Embedded
-    private MetaData metaData;
+    private String name;
+
+    private String description;
 
     @ManyToOne
     private Company company;

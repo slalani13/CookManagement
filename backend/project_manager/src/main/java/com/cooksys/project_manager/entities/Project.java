@@ -1,8 +1,5 @@
 package com.cooksys.project_manager.entities;
 
-import com.cooksys.project_manager.embeddables.MetaData;
-
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -20,8 +17,9 @@ public class Project {
     @GeneratedValue
     private Long id;
 
-    @Embedded
-    private MetaData metaData;
+    private String name;
+
+    private String description;
 
     private boolean active;
 

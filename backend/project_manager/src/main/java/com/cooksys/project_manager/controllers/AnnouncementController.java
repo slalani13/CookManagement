@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cooksys.project_manager.dtos.TeamResponseDto;
-import com.cooksys.project_manager.services.TeamService;
+import com.cooksys.project_manager.dtos.AnnouncementResponseDto;
+import com.cooksys.project_manager.services.AnnouncementService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,12 +15,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/company")
 
-public class TeamController {
-    private final TeamService teamService;
+public class AnnouncementController {
+    private final AnnouncementService announcementService;
 
-    @GetMapping("/{id}/teams")
-    public List<TeamResponseDto> getTeams() {
+    @GetMapping("/{id}/announcements")
+    public List<AnnouncementResponseDto> getAnnouncements() {
         return null;
     }
-    
+
 }

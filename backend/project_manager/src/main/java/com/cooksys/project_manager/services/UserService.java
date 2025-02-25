@@ -1,5 +1,5 @@
 package com.cooksys.project_manager.services;
 
-public interface ValidateService {
+public interface UserService {
     
 }
