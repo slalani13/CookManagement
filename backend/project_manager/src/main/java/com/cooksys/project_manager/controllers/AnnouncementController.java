@@ -3,13 +3,18 @@ package com.cooksys.project_manager.controllers;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cooksys.project_manager.dtos.AnnouncementResponseDto;
+import com.cooksys.project_manager.dtos.CompanyResponseDto;
 import com.cooksys.project_manager.services.AnnouncementService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -22,5 +27,21 @@ public class AnnouncementController {
     public List<AnnouncementResponseDto> getAnnouncements() {
         return null;
     }
+
+    @GetMapping
+    public AnnouncementResponseDto getAnnouncement() {
+        return null;
+    }
+
+    @PostMapping("/announcement")
+    public AnnouncementResponseDto createAnnouncement() {
+        return null;
+    }
+
+    @PatchMapping("/announcement/update")
+    public AnnouncementResponseDto updateAnnouncement() {
+        return null;
+    }
+    
 
 }

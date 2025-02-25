@@ -3,6 +3,8 @@ package com.cooksys.project_manager.controllers;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +24,21 @@ public class ProjectController {
     public List<ProjectResponseDto> getProjects() {
         return null;
     }
+
+    @GetMapping
+    public ProjectResponseDto getProject() {
+        return null;
+    }
+
+    @PostMapping("/project")
+    public ProjectResponseDto createProject() {
+        return null;
+    }
+
+    @PatchMapping("/project/update")
+    public ProjectResponseDto updateProject() {
+        return null;
+    }
+    
 
 }

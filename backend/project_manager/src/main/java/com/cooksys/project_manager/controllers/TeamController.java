@@ -3,6 +3,8 @@ package com.cooksys.project_manager.controllers;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +22,21 @@ public class TeamController {
 
     @GetMapping("/{id}/teams")
     public List<TeamResponseDto> getTeams() {
+        return null;
+    }
+    
+    @GetMapping
+    public TeamResponseDto getTeam() {
+        return null;
+    }
+
+    @PostMapping("/team")
+    public TeamResponseDto createTeam() {
+        return null;
+    }
+
+    @PatchMapping("/team/update")
+    public TeamResponseDto updateTeam() {
         return null;
     }
     
