@@ -29,6 +29,11 @@ public class TeamController {
     public List<TeamResponseDto> getTeams() {
         return teamService.getAllTeams();
     }
+
+    @GetMapping("/company/{company_id}")
+    public List<TeamResponseDto> getTeamsOfCompany(@PathVariable Long company_id) {
+        return teamService.getTeamsOfCompany(company_id);
+    }
     
     @GetMapping("/{team_id}")
     public TeamResponseDto getTeam(@PathVariable Long team_id) {

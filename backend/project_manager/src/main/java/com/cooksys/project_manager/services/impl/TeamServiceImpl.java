@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 import com.cooksys.project_manager.dtos.CredentialsDto;
 import com.cooksys.project_manager.dtos.TeamRequestDto;
 import com.cooksys.project_manager.dtos.TeamResponseDto;
+import com.cooksys.project_manager.entities.Company;
 import com.cooksys.project_manager.entities.Project;
 import com.cooksys.project_manager.entities.Team;
 import com.cooksys.project_manager.entities.User;
 import com.cooksys.project_manager.mappers.CompanyMapper;
 import com.cooksys.project_manager.mappers.TeamMapper;
 import com.cooksys.project_manager.exceptions.*;
+import com.cooksys.project_manager.repositories.CompanyRepository;
 import com.cooksys.project_manager.repositories.ProjectRepository;
 import com.cooksys.project_manager.repositories.TeamRepository;
 import com.cooksys.project_manager.repositories.UserRepository;
@@ -28,6 +30,7 @@ public class TeamServiceImpl implements TeamService{
     
     private final TeamRepository teamRepository;
     private final ProjectRepository projectRepository;
+    private final CompanyRepository companyRepository;
     private final UserRepository userRepository;
     private final TeamMapper teamMapper;
     private final CompanyMapper companyMapper;
@@ -61,14 +64,30 @@ public class TeamServiceImpl implements TeamService{
     private User getUserWithId(Long user_id){
         Optional<User> optionalUser = userRepository.findByIdAndIsActiveTrue(user_id);
         if (!optionalUser.isPresent()){
-            throw new BadRequestException(String.format("Userwith id %d is does not exist or is inactive", user_id));
+            throw new BadRequestException(String.format("User with id %d is does not exist or is inactive", user_id));
         }
         return optionalUser.get();
+    }
+
+    // finds company with id and doesn't care about auth
+    private Company getCompanyWithId(Long company_id){
+        Optional<Company> optionalCompany = companyRepository.findByIdAndIsDeletedFalse(company_id);
+        if (!optionalCompany.isPresent()){
+            throw new BadRequestException(String.format("Company with id %d is does not exist or is inactive", company_id));
+        }
+        return optionalCompany.get();
     }
 
     @Override
     public List<TeamResponseDto> getAllTeams() {
         return teamMapper.entitiesToDtos(teamRepository.findAllByIsDeletedFalse());
+    }
+
+    
+    @Override
+    public List<TeamResponseDto> getTeamsOfCompany(Long company_id) {
+        Company currCompany = getCompanyWithId(company_id);
+        return teamMapper.entitiesToDtos(currCompany.getTeams());
     }
 
     @Override
