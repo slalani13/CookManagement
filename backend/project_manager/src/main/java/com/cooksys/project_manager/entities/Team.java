@@ -29,6 +29,8 @@ public class Team {
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
+    private boolean isDeleted;
+
     @ManyToMany
     @JoinTable(
         name = "user_team",
