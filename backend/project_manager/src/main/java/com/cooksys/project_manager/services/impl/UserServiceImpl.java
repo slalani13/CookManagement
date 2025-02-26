@@ -4,8 +4,12 @@ import com.cooksys.project_manager.dtos.CredentialsDto;
 import com.cooksys.project_manager.dtos.UserRequestDto;
 import com.cooksys.project_manager.dtos.UserResponseDto;
 import com.cooksys.project_manager.entities.Credentials;
+import com.cooksys.project_manager.entities.Profile;
 import com.cooksys.project_manager.entities.User;
+import com.cooksys.project_manager.exceptions.BadRequestException;
+import com.cooksys.project_manager.exceptions.NotFoundException;
 import com.cooksys.project_manager.mappers.CredentialsMapper;
+import com.cooksys.project_manager.mappers.ProfileMapper;
 import com.cooksys.project_manager.mappers.UserMapper;
 import com.cooksys.project_manager.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -14,6 +18,8 @@ import com.cooksys.project_manager.services.UserService;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 
@@ -21,7 +27,8 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
     private final UserRepository userRepository;
-    private final CredentialsMapper credentialsMapper;
+//    private final CredentialsMapper credentialsMapper;
+    private final ProfileMapper profileMapper;
 
     @Override
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
@@ -58,6 +65,50 @@ public class UserServiceImpl implements UserService {
         return userMapper.entityToResponseDto(user);
     }
 
+    @Override
+    public UserResponseDto deleteUser( Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isEmpty() || !optionalUser.get().isActive()) {
+            throw new IllegalArgumentException("id not found or already deleted");
+        }
+        User user = optionalUser.get();
+        user.setActive(false);
+        userRepository.save(user);
+        return userMapper.entityToResponseDto(user);
+    }
+
+    @Override
+    public UserResponseDto getUserById(Long id) {
+        User user = userRepository.findByIdAndIsActiveTrue(id);
+        if (user == null) {
+            throw new NotFoundException("user not found");
+        }
+        return userMapper.entityToResponseDto(user);
+    }
+
+    @Override
+    public UserResponseDto updateUserProfile(Long id, Profile profile) {
+        User user = userRepository.findByIdAndIsActiveTrue(id);
+        if (user == null) {
+            throw new NotFoundException("user not found");
+        }
+        Profile userProfile = user.getProfile();
+        if (profile == null) {
+            throw new BadRequestException("Profile data is required");
+        }
+        if (profile.getFirstName() == null || profile.getLastName() == null || profile.getEmail() == null || profile.getPhone() == null ) {
+            throw new BadRequestException("incomplete profile data");
+        }
+
+        userProfile.setFirstName(profile.getFirstName());
+        userProfile.setLastName(profile.getLastName());
+        userProfile.setEmail(profile.getEmail());
+        userProfile.setPhone(profile.getPhone());
+
+        userRepository.save(user);
+
+        return userMapper.entityToResponseDto(user);
+    }
 
 
 }
