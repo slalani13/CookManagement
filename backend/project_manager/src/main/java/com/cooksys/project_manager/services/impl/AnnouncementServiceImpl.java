@@ -10,6 +10,7 @@ import com.cooksys.project_manager.mappers.AnnouncementMapper;
 import com.cooksys.project_manager.repositories.AnnouncementRepository;
 import com.cooksys.project_manager.repositories.CompanyRepository;
 import com.cooksys.project_manager.repositories.UserRepository;
+import com.cooksys.project_manager.services.ValidationService;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.project_manager.services.AnnouncementService;
@@ -26,6 +27,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     private final CompanyRepository companyRepository;
     private final AnnouncementMapper announcementMapper;
     private final UserRepository userRepository;
+    private final ValidationService validationService;
 
     @Override
     public List<AnnouncementResponseDto> getAnnouncementsByCompanyId(Long companyId) {
@@ -53,6 +55,8 @@ public class AnnouncementServiceImpl implements AnnouncementService {
                 .orElseThrow(() -> new NotFoundException("Author not found"));
         Company company = companyRepository.findById(announcementRequestDto.getCompanyId())
                 .orElseThrow(() -> new NotFoundException("Company not found"));
+
+        validationService.hasAuthorization(user);
 
         Announcement newAnnouncement = new Announcement();
         newAnnouncement.setAuthor(user);

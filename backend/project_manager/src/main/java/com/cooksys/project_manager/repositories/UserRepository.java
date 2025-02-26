@@ -14,8 +14,6 @@ import org.springframework.stereotype.Repository;
 
 import com.cooksys.project_manager.entities.User;
 
-import javax.swing.text.html.Option;
-import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{

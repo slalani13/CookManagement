@@ -82,12 +82,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto getUserById(Long id) {
-        Optional<User> user = userRepository.findByIdAndIsActiveTrue(id);
-        if (user.isEmpty()) {
+        Optional<User>  optionalUser = userRepository.findByIdAndIsActiveTrue(id);
+        if (optionalUser.isEmpty()) {
             throw new NotFoundException("user not found");
         }
-        return userMapper.entityToResponseDto(user.get());
+        return userMapper.entityToResponseDto(optionalUser.get());
     }
+
+//    private User getUser(Long id) {
+//        Optional<User>  optionalUser = userRepository.findByIdAndIsActiveTrue(id);
+//        if (optionalUser.isEmpty()) {
+//            throw new NotFoundException("user not found");
+//        }
+//        return optionalUser.get();
+//    }
+
 
     @Override
     public UserResponseDto updateUserProfile(Long id, Profile profile) {
