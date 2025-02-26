@@ -2,8 +2,6 @@ package com.cooksys.project_manager.dtos;
 
 import java.util.List;
 
-import com.cooksys.project_manager.entities.User;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +15,6 @@ public class TeamResponseDto {
 
     private String description;
 
-    private List<User> users;
+    private List<UserResponseDto> users;
     
 }
