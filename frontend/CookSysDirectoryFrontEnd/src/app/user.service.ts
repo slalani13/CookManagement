@@ -9,22 +9,28 @@ import { User } from './models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  private userSubject = new BehaviorSubject<User | null>(null);
-  user$ = this.userSubject.asObservable();
+  private userSource = new BehaviorSubject<User | null>(null);
+  user$ = this.userSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): Observable<any> {
+  login(email: string, password: string): Observable<User> {
     return this.http.post<User>('http://localhost:8080/login', { email, password }).pipe(
-      tap(user => this.userSubject.next(user))
+      tap(user => this.userSource.next(user))
     )
   }
 
-  updateUser(user: any): void {
-    this.userSubject.next(user);
+  updateUser(user: User) {
+    this.userSource.next(user);
   }
 
-  getUser(): Observable<User | null> {
-    return this.user$;
+  getUser(): User | null {
+    return this.userSource.value;
   }
+
+  setUser(user: User) {
+    this.userSource.next(user);
+  }
+
+
 }
