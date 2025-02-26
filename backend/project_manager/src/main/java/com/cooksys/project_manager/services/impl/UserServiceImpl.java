@@ -1,24 +1,22 @@
 package com.cooksys.project_manager.services.impl;
 
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
 import com.cooksys.project_manager.dtos.CredentialsDto;
 import com.cooksys.project_manager.dtos.UserRequestDto;
 import com.cooksys.project_manager.dtos.UserResponseDto;
-import com.cooksys.project_manager.entities.Credentials;
 import com.cooksys.project_manager.entities.Profile;
 import com.cooksys.project_manager.entities.User;
 import com.cooksys.project_manager.exceptions.BadRequestException;
 import com.cooksys.project_manager.exceptions.NotFoundException;
-import com.cooksys.project_manager.mappers.CredentialsMapper;
 import com.cooksys.project_manager.mappers.ProfileMapper;
 import com.cooksys.project_manager.mappers.UserMapper;
 import com.cooksys.project_manager.repositories.UserRepository;
-import org.springframework.stereotype.Service;
-
 import com.cooksys.project_manager.services.UserService;
 
 import lombok.RequiredArgsConstructor;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -54,15 +52,15 @@ public class UserServiceImpl implements UserService {
         if (credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
             throw new IllegalArgumentException("Username and password cannot be null");
         }
-        User user = userRepository.findByCredentialsUsernameAndCredentialsPassword(
+        Optional<User> user = userRepository.findByCredentialsUsernameAndCredentialsPassword(
                 credentialsDto.getUsername(), credentialsDto.getPassword()
         );
-        if (user == null) {
+        if (user.isEmpty()) {
             throw new IllegalArgumentException("Credentials do not match any user in the database");
         }
-        user.setStatus("active");
-        userRepository.save(user);
-        return userMapper.entityToResponseDto(user);
+        user.get().setStatus("active");
+        userRepository.save(user.get());
+        return userMapper.entityToResponseDto(user.get());
     }
 
     @Override
@@ -79,19 +77,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto getUserById(Long id) {
-        User user = userRepository.findByIdAndIsActiveTrue(id);
-        if (user == null) {
+        Optional<User>  optionalUser = userRepository.findByIdAndIsActiveTrue(id);
+        if (optionalUser.isEmpty()) {
             throw new NotFoundException("user not found");
         }
-        return userMapper.entityToResponseDto(user);
+        return userMapper.entityToResponseDto(optionalUser.get());
     }
+
+    private User getUser(Long id) {
+        Optional<User>  optionalUser = userRepository.findByIdAndIsActiveTrue(id);
+        if (optionalUser.isEmpty()) {
+            throw new NotFoundException("user not found");
+        }
+        return optionalUser.get();
+    }
+
 
     @Override
     public UserResponseDto updateUserProfile(Long id, Profile profile) {
-        User user = userRepository.findByIdAndIsActiveTrue(id);
-        if (user == null) {
-            throw new NotFoundException("user not found");
-        }
+        User user = getUser(id);
         Profile userProfile = user.getProfile();
         if (profile == null) {
             throw new BadRequestException("Profile data is required");
