@@ -15,7 +15,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<User> {
-    return this.http.post<User>('http://localhost:8080/login', { email, password }).pipe(
+    return this.http.post<User>('http://localhost:8080/users/login', { email, password }).pipe(
       tap(user => this.userSource.next(user))
     )
   }
