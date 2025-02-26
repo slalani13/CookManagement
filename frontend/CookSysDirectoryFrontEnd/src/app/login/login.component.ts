@@ -12,13 +12,13 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  email: string = ''
+  username: string = ''
   password: string = ''
 
   constructor(private router: Router, private userService: UserService) {} 
 
   navigateToSelectCompany() {
-    this.userService.login(this.email, this.password).pipe(
+    this.userService.login(this.username, this.password).pipe(
       tap((user: User) => {
         console.log(user);
         this.router.navigate(['/select-company']);
