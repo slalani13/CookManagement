@@ -1,14 +1,9 @@
 package com.cooksys.project_manager.controllers;
 
+import com.cooksys.project_manager.dtos.CredentialsDto;
+import com.cooksys.project_manager.entities.Profile;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.cooksys.project_manager.dtos.UserRequestDto;
 import com.cooksys.project_manager.dtos.UserResponseDto;
@@ -25,13 +20,13 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserResponseDto userLogin() {
-        return null;
+    public UserResponseDto userLogin(@RequestBody CredentialsDto credentialsDto) {
+        return userService.activateUser(credentialsDto);
     }
 
-    @GetMapping
-    public UserResponseDto getUser() {
-        return null;
+    @GetMapping("/{id}")
+    public UserResponseDto getUser(@PathVariable Long id) {
+        return userService.getUserById(id);
     }
 
     @PostMapping
@@ -40,14 +35,13 @@ public class UserController {
         return userService.createUser(userRequestDto);
     }
 
-
-    @PatchMapping("/update")
-    public UserResponseDto updateProfile() {
-        return null;
+    @PatchMapping("update/{id}")
+    public UserResponseDto updateProfile(@PathVariable Long id, @RequestBody Profile profile) {
+        return userService.updateUserProfile(id, profile);
     }
 
-    @DeleteMapping
-    public UserResponseDto deactivateUser() {
-        return null;
+    @DeleteMapping("/{id}")
+    public UserResponseDto deactivateUser(@PathVariable Long id) {
+        return userService.deleteUser(id);
     }
 }
