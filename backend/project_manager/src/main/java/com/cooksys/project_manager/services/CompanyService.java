@@ -5,11 +5,12 @@ import java.util.List;
 import com.cooksys.project_manager.dtos.AnnouncementResponseDto;
 import com.cooksys.project_manager.dtos.CompanyRequestDto;
 import com.cooksys.project_manager.dtos.CompanyResponseDto;
+import com.cooksys.project_manager.dtos.FullUserDto;
 import com.cooksys.project_manager.dtos.UserResponseDto;
 
 public interface CompanyService {
 
-    List<UserResponseDto> getUsers(Long id);
+    List<FullUserDto> getUsers(Long id);
 
     List<CompanyResponseDto> getCompanies();
 

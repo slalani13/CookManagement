@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cooksys.project_manager.dtos.AnnouncementResponseDto;
 import com.cooksys.project_manager.dtos.CompanyRequestDto;
 import com.cooksys.project_manager.dtos.CompanyResponseDto;
+import com.cooksys.project_manager.dtos.FullUserDto;
 import com.cooksys.project_manager.dtos.UserResponseDto;
 import com.cooksys.project_manager.services.CompanyService;
 
@@ -29,7 +30,7 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @GetMapping("/{id}/users")
-    public List<UserResponseDto> getUsers(@PathVariable long id) {
+    public List<FullUserDto> getUsers(@PathVariable Long id) {
         return companyService.getUsers(id);
     }
 
