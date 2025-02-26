@@ -13,4 +13,6 @@ public class ProjectResponseDto {
 
     private TeamResponseDto team;
 
+    private boolean active;
+
 }
