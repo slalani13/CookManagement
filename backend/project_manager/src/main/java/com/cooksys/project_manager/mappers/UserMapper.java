@@ -9,7 +9,8 @@ import com.cooksys.project_manager.dtos.UserRequestDto;
 import com.cooksys.project_manager.dtos.UserResponseDto;
 import com.cooksys.project_manager.entities.User;
 
-@Mapper(componentModel = "spring", uses = { ProfileMapper.class, CredentialsMapper.class } )
+
+@Mapper(componentModel = "spring", uses = { ProfileMapper.class, CredentialsMapper.class })
 public interface UserMapper {
 
     User requestDtoToEntity(UserRequestDto userRequestDto);
@@ -18,5 +19,7 @@ public interface UserMapper {
     UserResponseDto entityToResponseDto(User user);
 
     List<UserResponseDto> entitiesToDto(List<User> entities);
+
+    List<User> dtosToEntities(List<UserRequestDto> users);
 
 }

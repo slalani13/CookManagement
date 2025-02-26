@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cooksys.project_manager.dtos.CredentialsDto;
 import com.cooksys.project_manager.dtos.ProjectRequestDto;
 import com.cooksys.project_manager.dtos.ProjectResponseDto;
 import com.cooksys.project_manager.services.ProjectService;
@@ -19,35 +20,40 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/project")
+@RequestMapping("/projects")
 
 public class ProjectController {
     private final ProjectService projectService;
 
-    @GetMapping("/{company_id}/teams/{team_id}/projects")
-    public List<ProjectResponseDto> getProjects(@PathVariable Long company_id, @PathVariable Long team_id) {
+    @GetMapping
+    public List<ProjectResponseDto> getAllProjects() {
         return projectService.getAllProjects();
     }
 
-    @GetMapping
-    public ProjectResponseDto getProject() {
-        return null;
+    @GetMapping("/teams/{team_id}")
+    public List<ProjectResponseDto> getCompanyProjectsOfTeam(@PathVariable Long team_id) {
+        return projectService.getCompanyProjectsOfTeam(team_id);
     }
 
-    @PostMapping("/project")
-    public ProjectResponseDto createProject(@RequestBody ProjectRequestDto projectRequestDto) {
-        return projectService.createProject(projectRequestDto);
+    @GetMapping("/{project_id}")
+    public ProjectResponseDto getProject(@PathVariable Long project_id) {
+        return projectService.getProject(project_id);
     }
 
-    @PatchMapping("/project/update")
-    public ProjectResponseDto updateProject() {
-        return null;
+    @PostMapping("/teams/{team_id}")
+    public ProjectResponseDto createProject(@PathVariable Long team_id, @RequestBody ProjectRequestDto projectRequestDto, @RequestBody CredentialsDto credentialsDto) {
+        return projectService.createProject(team_id, projectRequestDto, credentialsDto);
     }
 
-    @DeleteMapping
-    public ProjectResponseDto deactivateProject() {
-        return null;
+    @PatchMapping("/{project_id}")
+    public ProjectResponseDto updateProject(@PathVariable Long project_id, @RequestBody ProjectRequestDto projectRequestDto, 
+                                            @RequestBody CredentialsDto credentialsDto) {                 
+        return projectService.updateProject(project_id, projectRequestDto, credentialsDto);
     }
     
+    @DeleteMapping("/{project_id}")
+    public String fullyDeleteProject(@PathVariable Long project_id, @RequestBody CredentialsDto credentialsDto) {                 
+        return projectService.fullyDeleteProject(project_id, credentialsDto);
+    }
 
 }

@@ -1,10 +1,12 @@
 package com.cooksys.project_manager.dtos;
 
-import lombok.Data;
+
 import lombok.NoArgsConstructor;
 
-@Data
+import lombok.Data;
+
 @NoArgsConstructor
+@Data
 public class ProfileDto {
 
     private String firstName;

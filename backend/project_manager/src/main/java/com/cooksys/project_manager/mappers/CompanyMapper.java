@@ -12,7 +12,7 @@ import com.cooksys.project_manager.entities.User;
 
 
 
-@Mapper(componentModel = "spring", uses = { UserMapper.class})
+@Mapper(componentModel = "spring", uses = { UserMapper.class, ProfileMapper.class})
 
 public interface CompanyMapper {
     
@@ -22,5 +22,7 @@ public interface CompanyMapper {
 
     CompanyRequestDto entityToReqDto(Company company);
 
-    List<UserResponseDto> entitiesToDto(List<User> users);
+    CompanyResponseDto entityToDto(Company company);
+
+    List<CompanyResponseDto> entitiesToDto(List<Company> companies);
 }
