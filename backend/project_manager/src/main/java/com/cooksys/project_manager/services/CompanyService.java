@@ -15,9 +15,9 @@ public interface CompanyService {
 
     CompanyResponseDto getCompany(Long id);
 
-    AnnouncementResponseDto createCompany(CompanyRequestDto companyRequestDto);
+    CompanyResponseDto createCompany(CompanyRequestDto companyRequestDto);
 
-    CompanyResponseDto updateCompany(Long id);
+    CompanyResponseDto updateCompany(Long id, CompanyRequestDto companyRequestDto);
 
     CompanyResponseDto deleteCompany(Long id);
 
