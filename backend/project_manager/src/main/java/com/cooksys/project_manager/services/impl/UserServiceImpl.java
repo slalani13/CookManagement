@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.requestDtoToEntity(userRequestDto);
         // check that profile, credentials, and admin aren't null
         // Validate required fields
+        Boolean isAdmin = user.isAdmin();
         if (user.getProfile() == null || user.getCredentials() == null) {
             throw new IllegalArgumentException("Profile, Credentials, and Admin fields cannot be null.");
         }
@@ -43,6 +44,7 @@ public class UserServiceImpl implements UserService {
         // else create new user
         user.setActive(true);
         user.setStatus("inactive");
+        user.setAdmin(user.isAdmin());
         userRepository.save(user);
         UserResponseDto response = userMapper.entityToResponseDto(user);
         System.out.println("Returning response: " + response);
@@ -54,12 +56,13 @@ public class UserServiceImpl implements UserService {
         if (credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
             throw new IllegalArgumentException("Username and password cannot be null");
         }
-        User user = userRepository.findByCredentialsUsernameAndCredentialsPassword(
+        Optional<User> optionalUser = userRepository.findByCredentialsUsernameAndCredentialsPassword(
                 credentialsDto.getUsername(), credentialsDto.getPassword()
         );
-        if (user == null) {
+        if (optionalUser.isEmpty()) {
             throw new IllegalArgumentException("Credentials do not match any user in the database");
         }
+        User user = optionalUser.get();
         user.setStatus("active");
         userRepository.save(user);
         return userMapper.entityToResponseDto(user);
@@ -79,19 +82,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto getUserById(Long id) {
-        User user = userRepository.findByIdAndIsActiveTrue(id);
-        if (user == null) {
+        Optional<User> user = userRepository.findByIdAndIsActiveTrue(id);
+        if (user.isEmpty()) {
             throw new NotFoundException("user not found");
         }
-        return userMapper.entityToResponseDto(user);
+        return userMapper.entityToResponseDto(user.get());
     }
 
     @Override
     public UserResponseDto updateUserProfile(Long id, Profile profile) {
-        User user = userRepository.findByIdAndIsActiveTrue(id);
-        if (user == null) {
+        Optional<User> optionalUser = userRepository.findByIdAndIsActiveTrue(id);
+        if (optionalUser.isEmpty()) {
             throw new NotFoundException("user not found");
         }
+        User user = optionalUser.get();
         Profile userProfile = user.getProfile();
         if (profile == null) {
             throw new BadRequestException("Profile data is required");
