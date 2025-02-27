@@ -1,40 +1,38 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { UserRegistryCardComponent } from '../user-registry-card/user-registry-card.component';
+import { CommonModule } from '@angular/common';
+import { CompanyService } from '../company.service';
+import { User } from '../models/user.model';
 
-export interface User {
-  name: string;
-  email: string;
-  active: boolean;
-  admin: boolean;
-  status: string;
-}
 
 @Component({
   selector: 'app-users-reg',
-  imports: [],
+  imports: [UserRegistryCardComponent, CommonModule],
   templateUrl: './users-reg.component.html',
   styleUrl: './users-reg.component.css'
 })
-export class UsersRegComponent {
-  @Input() companyId: Number = 0;
+export class UsersRegComponent implements OnInit{
   users: User[] = [];
+  selectedCompanyId: number | null = null;
 
-  constructor(private http: HttpClient) { } // Inject HttpClient
+  constructor(private companyService: CompanyService) {}
 
   ngOnInit(): void {
-    if (this.companyId) {
-      this.getUsers();  // Fetch users when the component loads if companyId is available
-    }
+    this.companyService.selectedCompanyId$.subscribe(companyId => {
+      this.selectedCompanyId = companyId;
+      if (companyId) {
+        this.fetchUsers(companyId);
+      } else {
+        this.users = [];
+      }
+    });
   }
 
-
-  getUsers(): void {
-      const url = `https://localhost:8080/users/${this.companyId}`;
-      this.http.get<User[]>(url).subscribe((data: User[]) => {
-          this.users = data;  // Assign the fetched data to the users array
-        }, (error) => {
-          console.error('Error fetching users', error);  // Handle error
-        });
-    }
+  fetchUsers(companyId: number): void {
+    this.companyService.getUsersByCompanyId().subscribe(users => {
+      this.users = users;
+      console.log('Users for selected company:', this.users);
+    });
+  }
 
 }

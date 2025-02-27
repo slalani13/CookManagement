@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { tap } from 'rxjs';
 import { Company } from './models/company.model';
 import { Announcement } from './models/announcement.model';
+import {User} from './models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,9 @@ export class CompanyService {
   private announcementsSource = new BehaviorSubject<Announcement[] | null>(null);
   announcements$ = this.announcementsSource.asObservable();
 
+  // New property to store selected company ID
+  private selectedCompanyIdSource = new BehaviorSubject<number | null>(null);
+  selectedCompanyId$ = this.selectedCompanyIdSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -37,6 +41,18 @@ export class CompanyService {
         this.announcementsSource.next([...currentAnnouncements, announcement]);
       })
     )
+  }
+  // Set the selected company ID
+  setSelectedCompanyId(companyId: number) {
+    this.selectedCompanyIdSource.next(companyId);
+  }
+
+  getUsersByCompanyId() {
+    const companyId = this.selectedCompanyIdSource.value;
+  if (companyId) {
+    return this.http.get<User[]>(`http://localhost:8080/company/${companyId}/users`);
+  }
+  return of([]); // Return an Observable of an empty array
   }
 
 }
