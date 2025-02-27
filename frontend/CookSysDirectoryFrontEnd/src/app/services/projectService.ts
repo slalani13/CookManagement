@@ -1,5 +1,5 @@
 import { fetchData } from "./fetchService";
-import { projectData } from "../models/projectData";
+import { projectRequestData } from "../models/projectData";
 import { credentialsData } from "../models/credentialsData";
 
 export async function getProjectsFromTeam(team_id:number){
@@ -39,7 +39,7 @@ export async function getAllProjects(){
 }
 
 
-export async function createProject(team_id:number, projectRequest:projectData){
+export async function createProject(team_id:number, projectRequest:projectRequestData){
     return fetchData({
     endpoint: `projects/teams/${team_id}`,
     method: "POST",
@@ -60,9 +60,9 @@ export async function createProject(team_id:number, projectRequest:projectData){
     })
 }
 
-export async function updateProject(project_id:number, projectRequest:projectData){
+export async function updateProject(project_id:number, projectRequest:projectRequestData){
     return fetchData({
-    endpoint: `${project_id}`,
+    endpoint: `projects/${project_id}`,
     method: "PATCH",
     body: JSON.stringify(projectRequest),
     headers: {"Content-Type": "application/json"},
