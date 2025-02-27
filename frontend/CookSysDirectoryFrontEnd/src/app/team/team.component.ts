@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TeamCardComponent } from './team-card/team-card.component'
 import { CreateTeamComponent } from '../create-team/create-team.component';
 import { getAllTeams } from '../services/teamService'
+import { getProjectsFromTeam } from '../services/projectService';
 
 @Component({
   selector: 'app-team',
@@ -13,6 +14,7 @@ import { getAllTeams } from '../services/teamService'
 })
 export class TeamComponent {
   teams: any[] = []
+  projects: any[] = []
   overlayShown = false
 
   constructor() {}
@@ -25,9 +27,19 @@ export class TeamComponent {
     this.overlayShown = !this.overlayShown
   }
 
-  fetchTeams() {
-    getAllTeams().then((teams: any[]) => {
-      this.teams = teams
-    })
+  async fetchTeams() {
+    const teams = await getAllTeams()
+    // getAllTeams().then((teams: any[]) => {
+    //   this.teams = teams
+    // })
+    console.log("Before loop")
+    for (let team of teams) {
+      const project = await getProjectsFromTeam(team.id)
+      console.log(`team id: ${team.id}`)
+      this.projects.push(project)
+    }
+    console.log("BELOW IS this.teams: ")
+    console.log(this.projects);
+    this.teams = teams
   }
 }
