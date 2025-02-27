@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { TeamComponent } from '../team.component';
 import { CommonModule } from '@angular/common';
 
 
@@ -14,7 +13,7 @@ export class TeamCardComponent {
   @Input() team: any = {
     id: 0,
     name: '',
-    employees: [],
+    users: [],
     projects: []
   };
   id = 0;
@@ -24,7 +23,11 @@ export class TeamCardComponent {
 
   ngOnInit() {
     this.id = this.team.id
-    this.numProjects = this.team.projects.length
+    console.log(this.id)
+    console.log(this.team.users)
+    this.numProjects = this.team.projects ? this.team.projects.length : 0
+
+    console.log('Team data in TeamCardComponent:', this.team);
   }
 
   onSubmit() {

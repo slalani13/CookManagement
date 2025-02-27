@@ -6,13 +6,13 @@
   <div class="grid gap-8 w-full max-w-4xl">
     <div *ngFor="let announcement of paginatedAnnouncements" class="bg-[#0B2D45] shadow-md rounded-lg p-4 w-full h-auto min-h-[384px] flex flex-col justify-center items-center relative">
         <div class="absolute top-4 left-4">
-          <span class="font-bold text-white font-mulish">User Name</span>
+          <span class="font-bold text-white font-mulish">{{ announcement.author.profile.firstName }} {{ announcement.author.profile.lastName }}</span>
         </div>
         <div class="absolute top-4 right-4">
-          <span class="text-white font-mulish">{{announcement.date}}</span>
+          <span class="text-white font-mulish">{{ announcement.date }}</span>
         </div>
         <div class="text-white text-center font-inter">
-          {{ announcement.content }}
+          {{ announcement.message }}
         </div>
       </div>
     </div>
