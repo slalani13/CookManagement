@@ -1,1 +1,19 @@
-<p>users-reg works!</p>
+<p class="text-center text-white text-sm">Users Registry Component</p>
+<div class="flex flex-col items-center justify-center h-screen p-6">
+  <!-- Title centered -->
+  <h1 class="text-3xl font-bold text-[#DEB992] text-center mb-4">User Registry</h1>
+
+  <!-- Description below the title -->
+  <p class="text-center text-[#DEB992] text-sm mb-6">Here are all the users in the company:</p>
+
+  <!-- User registry card table -->
+  <app-user-registry-card *ngIf="users.length > 0" [users]="users" class="w-full max-w-4xl mb-6"></app-user-registry-card>
+
+  <!-- Message when no users are found -->
+  <p *ngIf="users.length === 0" class="text-center text-white text-sm">No users found for the selected company.</p>
+
+  <!-- Add User button -->
+  <button class="mt-6 px-6 py-2 bg-[#DEB992] text-[#051622] rounded-lg hover:bg-[#c8a665] transition-all">
+    Add User
+  </button>
+</div>

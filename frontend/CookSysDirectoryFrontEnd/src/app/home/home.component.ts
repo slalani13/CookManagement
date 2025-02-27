@@ -36,6 +36,8 @@ export class HomeComponent implements OnInit {
 
   onSubmit() {
     // Handle form submission logic here
+
+    // call service and save company id inside my service.ts
     this.closeModal();
   }
 
