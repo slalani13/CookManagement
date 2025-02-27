@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { getProjectsFromTeam } from '../services/projectService';
 import { projectData } from '../models/projectData';
+import { credentialsData } from '../models/credentialsData';
 
 @Component({
   selector: 'app-projects',

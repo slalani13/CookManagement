@@ -15,6 +15,6 @@ public class ProjectRequestDto {
 
     private boolean active;
 
-    private TeamResponseDto team;
+    private Long team;
     
 }

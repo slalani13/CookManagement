@@ -101,7 +101,7 @@ public class TeamServiceImpl implements TeamService{
         Team newTeam = teamRepository.save(teamMapper.requestDtoToEntity(teamRequestDto));
         newTeam.setName(teamRequestDto.getName());
         newTeam.setDescription(teamRequestDto.getDescription());
-        newTeam.setCompany(companyMapper.responseDtoToEntity(teamRequestDto.getCompany()));
+        newTeam.setCompany(teamRequestDto.getCompany());
         return teamMapper.entityToResponseDto(teamRepository.save(newTeam));
     }
 

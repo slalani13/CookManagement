@@ -1,6 +1,7 @@
 import { List, toPairs } from "lodash";
 import { projectData } from "../models/projectData";
 import "whatwg-fetch";
+import { credentialsData } from "../models/credentialsData";
 
 const BASE_URL = "http://localhost:8080";
 
@@ -30,16 +31,20 @@ export const request = (url: any, options?: any) => {
     return fetch(url, options).then(parseJSON);
 };
 
-const fetchData = ({ endpoint, params }: any) => {
+const fetchData = ({ endpoint, method="GET", body, headers }: any) => {
     let url = [BASE_URL, endpoint].join("/");
     console.log("project url: "+url);
-    if (params) {
-        const paramString = toPairs(params)
+    if (headers) {
+        const paramString = toPairs(headers)
         .map((param: any) => param.join("="))
         .join("&");
         url += `?${paramString}`;
     }
-    const options = {};
+    const options: RequestInit = {
+        method,
+        headers,
+        body
+    };
     return request(url, options);
 };
 
@@ -58,6 +63,45 @@ export async function getProjectsFromTeam(team_id:number){
 
     }).catch(() => {
     console.log("getting projects failed for team id: "+team_id);
+    return [];
+    })
+}
+
+export async function getAllProjects(){
+    return fetchData({
+    endpoint: `projects`,
+    }).then((response) => {
+    if (response) {
+        return response
+    }
+    else{
+        console.log("getting all projects failed");
+        return [];
+    }
+
+    }).catch(() => {
+    console.log("getting all projects failed");
+    return [];
+    })
+}
+
+
+export async function createProject(team_id:number, projectRequest:projectData, credentialsRequest: credentialsData){
+    return fetchData({
+    endpoint: `projects/teams/${team_id}`,
+    method: "POST",
+    body: JSON.stringify({ projectRequest, credentialsRequest }),
+    }).then((response) => {
+    if (response) {
+        return response
+    }
+    else{
+        console.log("creating project failed for team id: "+team_id);
+        return [];
+    }
+
+    }).catch(() => {
+    console.log("creating project failed failed for team id: "+team_id);
     return [];
     })
 }
