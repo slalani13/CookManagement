@@ -23,7 +23,8 @@ public class Project {
     private boolean isActive;
 
     private Long team;
-    
+
+    @Column(columnDefinition = "TEXT")
     private String content;
 
 }
