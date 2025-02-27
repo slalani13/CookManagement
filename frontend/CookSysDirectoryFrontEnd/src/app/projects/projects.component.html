@@ -20,6 +20,7 @@
                 [name]="project.name" 
                 [description]="project.description" 
                 [active]="project.active"
+                [project_data]="project"
                 (projectClosed)="closeMenu()"
                 (projectEdited)="closeMenuAndRefresh()"
                 class="w-2/3">

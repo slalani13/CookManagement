@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cooksys.project_manager.dtos.ContentRequestDto;
 import com.cooksys.project_manager.dtos.CredentialsDto;
 import com.cooksys.project_manager.dtos.ProjectRequestDto;
 import com.cooksys.project_manager.dtos.ProjectResponseDto;
@@ -48,6 +49,11 @@ public class ProjectController {
     @PatchMapping("/{project_id}")
     public ProjectResponseDto updateProject(@PathVariable Long project_id, @RequestBody ProjectRequestDto projectRequestDto) {                 
         return projectService.updateProject(project_id, projectRequestDto);
+    }
+
+    @PatchMapping("/{project_id}/content")
+    public ProjectResponseDto updateProjectContent(@PathVariable Long project_id, @RequestBody ContentRequestDto contentRequestDto) {                 
+        return projectService.updateProjectContent(project_id, contentRequestDto);
     }
     
     @DeleteMapping("/{project_id}")

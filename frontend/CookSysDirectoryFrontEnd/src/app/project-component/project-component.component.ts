@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EditProjectComponent } from '../edit-project/edit-project.component';
 import { Router } from '@angular/router';
+import { projectResponseData } from '../models/projectData';
 
 @Component({
   selector: 'app-project-component',
@@ -20,6 +21,7 @@ export class ProjectComponentComponent implements OnInit{
   @Input() name: string = '';
   @Input() description: string = '';
   @Input() active: boolean = false;
+  @Input() project_data: projectResponseData|null = null;
 
   editing_project:boolean = false;
   
@@ -31,7 +33,7 @@ export class ProjectComponentComponent implements OnInit{
   }
 
   toProjectPage(){
-    this.router.navigate(['/project-page']);
+    this.router.navigate(['/project-page'], { queryParams: { project_id: this.project_data!.id }});
   }
 
   setEditing():void{
