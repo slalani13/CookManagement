@@ -11,11 +11,11 @@ public interface UserService {
 
     FullUserDto createUser(UserRequestDto userRequestDto);
 
-    UserResponseDto activateUser(CredentialsDto credentialsDto);
+    FullUserDto activateUser(CredentialsDto credentialsDto);
 
-    UserResponseDto deleteUser( Long id);
+    FullUserDto deleteUser( Long id);
 
-    UserResponseDto getUserById(Long id);
+    FullUserDto getUserById(Long id);
 
-    UserResponseDto updateUserProfile(Long id, Profile profile);
+    FullUserDto updateUserProfile(Long id, Profile profile);
 }

@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDto activateUser(CredentialsDto credentialsDto) {
+    public FullUserDto activateUser(CredentialsDto credentialsDto) {
         if (credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
             throw new IllegalArgumentException("Username and password cannot be null");
         }
@@ -69,11 +69,11 @@ public class UserServiceImpl implements UserService {
         User user = optionalUser.get();
         user.setStatus("active");
         userRepository.save(user);
-        return userMapper.entityToResponseDto(user);
+        return userMapper.entityToFullUserDto(user);
     }
 
     @Override
-    public UserResponseDto deleteUser( Long id) {
+    public FullUserDto deleteUser( Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty() || !optionalUser.get().isActive()) {
             throw new IllegalArgumentException("id not found or already deleted");
@@ -81,16 +81,16 @@ public class UserServiceImpl implements UserService {
         User user = optionalUser.get();
         user.setActive(false);
         userRepository.save(user);
-        return userMapper.entityToResponseDto(user);
+        return userMapper.entityToFullUserDto(user);
     }
 
     @Override
-    public UserResponseDto getUserById(Long id) {
+    public FullUserDto getUserById(Long id) {
         Optional<User>  optionalUser = userRepository.findByIdAndIsActiveTrue(id);
         if (optionalUser.isEmpty()) {
             throw new NotFoundException("user not found");
         }
-        return userMapper.entityToResponseDto(optionalUser.get());
+        return userMapper.entityToFullUserDto(optionalUser.get());
     }
 
 //    private User getUser(Long id) {
@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserResponseDto updateUserProfile(Long id, Profile profile) {
+    public FullUserDto updateUserProfile(Long id, Profile profile) {
         Optional<User> optionalUser = userRepository.findByIdAndIsActiveTrue(id);
         if (optionalUser.isEmpty()) {
             throw new NotFoundException("user not found");
@@ -124,7 +124,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
 
-        return userMapper.entityToResponseDto(user);
+        return userMapper.entityToFullUserDto(user);
     }
 
 

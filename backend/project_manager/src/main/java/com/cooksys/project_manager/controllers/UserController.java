@@ -21,12 +21,12 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserResponseDto userLogin(@RequestBody CredentialsDto credentialsDto) {
+    public FullUserDto userLogin(@RequestBody CredentialsDto credentialsDto) {
         return userService.activateUser(credentialsDto);
     }
 
     @GetMapping("/{id}")
-    public UserResponseDto getUser(@PathVariable Long id) {
+    public FullUserDto getUser(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
@@ -37,12 +37,12 @@ public class UserController {
     }
 
     @PatchMapping("update/{id}")
-    public UserResponseDto updateProfile(@PathVariable Long id, @RequestBody Profile profile) {
+    public FullUserDto updateProfile(@PathVariable Long id, @RequestBody Profile profile) {
         return userService.updateUserProfile(id, profile);
     }
 
     @DeleteMapping("/{id}")
-    public UserResponseDto deactivateUser(@PathVariable Long id) {
+    public FullUserDto deactivateUser(@PathVariable Long id) {
         return userService.deleteUser(id);
     }
 }
