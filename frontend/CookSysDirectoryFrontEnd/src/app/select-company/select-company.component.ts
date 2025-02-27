@@ -1,23 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../models/user.model';
+import { Company } from '../models/company.model';
+import { UserService } from '../user.service';
+import { CompanyService } from '../company.service';
+import { CommonModule } from '@angular/common';
+import { Announcement } from '../models/announcement.model';
 
 @Component({
   selector: 'app-select-company',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './select-company.component.html',
   styleUrl: './select-company.component.css'
 })
-export class SelectCompanyComponent {
-  constructor(private router: Router) {}
+export class SelectCompanyComponent implements OnInit{
+  user: User | null = null;
+  companies: Company[] = [];
+  selectedCompany: Company | null = null;
+  announcements: Announcement[] = [];
 
-  onCompanySelect(event: Event) {
-    const selectElement = event.target as HTMLSelectElement
-    const selectedValue = selectElement.value
+  constructor(private router: Router, private userService: UserService, private companyService: CompanyService) {}
 
-    if (selectedValue) {
-      this.router.navigate(['/home'])
-    }
-
+  ngOnInit(): void {
+      this.userService.user$.subscribe(user => {
+        this.user = user;
+        if (user && user.companies) {
+          this.companies = user.companies as Company[];
+        }
+      });
   }
 
+  onCompanySelect(event: Event): void {
+    const selectedCompanyId = (event.target as HTMLSelectElement).value;
+    console.log('Selected company ID:', selectedCompanyId);
+
+    // Fetch company details
+    this.companyService.getCompanyById(Number(selectedCompanyId)).subscribe(company => {
+      this.selectedCompany = company;
+      console.log('Selected company details:', this.selectedCompany);
+    });
+
+    // Fetch announcements for the selected company
+    this.companyService.getAnnouncementsByCompanyId(Number(selectedCompanyId)).subscribe(announcements => {
+      this.announcements = announcements;
+      console.log('Announcements for selected company:', this.announcements);
+    });
+    this.router.navigate(['/home']);
+  }
 }
