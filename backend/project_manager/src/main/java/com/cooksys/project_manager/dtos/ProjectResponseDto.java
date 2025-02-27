@@ -17,4 +17,6 @@ public class ProjectResponseDto {
 
     private boolean active;
 
+    private String content;
+
 }

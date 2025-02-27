@@ -127,5 +127,14 @@ public class UserServiceImpl implements UserService {
         return userMapper.entityToFullUserDto(user);
     }
 
-
+    @Override
+    public void logoutUser(FullUserDto fullUserDto) {
+        Optional<User> optionalUser = userRepository.findById(fullUserDto.getId());
+        if (optionalUser.isEmpty()) {
+            throw new IllegalArgumentException("User not found!!");
+        }
+        User user = optionalUser.get();
+        user.setStatus("inactive");
+        userRepository.save(user);
+    }
 }

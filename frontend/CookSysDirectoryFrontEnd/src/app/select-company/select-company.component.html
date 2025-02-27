@@ -1,4 +1,4 @@
-<div class="flex items-center justify-center min-h-screen text-center p-4">
+<!-- <div class="flex items-center justify-center min-h-screen text-center p-4">
     <div>
       <h1 class="text-4xl md:text-5xl lg:text-[99px] font-bold mb-4 text-[#1BA098]">Select Company</h1>
       <select (change)="onCompanySelect($event)" class="mt-2 p-2 border border-gray-300 rounded bg-white text-[#5533FF] w-full max-w-xs md:max-w-sm lg:max-w-md">
@@ -6,4 +6,27 @@
         <option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</option>
       </select>
     </div>
+</div> -->
+
+<div class="flex items-center justify-center min-h-screen text-center p-4">
+  <div>
+    <h1 class="text-4xl md:text-5xl lg:text-[99px] font-bold mb-4 text-[#1BA098]">Select Company</h1>
+    <select (change)="onCompanySelect($event)" class="mt-2 p-2 border border-gray-300 rounded bg-white text-[#5533FF] w-full max-w-xs md:max-w-sm lg:max-w-md">
+      <option value="" disabled selected>Pick an option</option>
+      <option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</option>
+    </select>
   </div>
+</div>
+
+<div *ngIf="selectedCompany$ | async as selectedCompany" class="mt-8 text-center">
+  <h3 class="text-2xl font-semibold">Selected Company Details</h3>
+  <p class="mt-2">Name: {{ selectedCompany.name }}</p>
+  <p>Description: {{ selectedCompany.description }}</p>
+</div>
+
+<div *ngIf="announcements$ | async as announcements" class="mt-8 text-center">
+  <h3 class="text-2xl font-semibold">Announcements</h3>
+  <div *ngFor="let announcement of announcements" class="mt-2">
+    <p>{{ announcement.message }}</p>
+  </div>
+</div>

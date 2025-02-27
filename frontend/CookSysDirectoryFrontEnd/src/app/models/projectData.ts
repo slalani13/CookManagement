@@ -14,8 +14,10 @@ export interface projectResponseData{
     description:string,
     team:number,
     active:boolean,
+    content:string
 }
 
-export interface projectContent{
+export interface contentRequestData{
     content:string
+    credentials:credentialsData
 }
