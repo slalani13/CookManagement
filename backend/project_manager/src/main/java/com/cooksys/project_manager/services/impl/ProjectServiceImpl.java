@@ -1,6 +1,5 @@
 package com.cooksys.project_manager.services.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,17 +8,13 @@ import org.springframework.stereotype.Service;
 import com.cooksys.project_manager.dtos.CredentialsDto;
 import com.cooksys.project_manager.dtos.ProjectRequestDto;
 import com.cooksys.project_manager.dtos.ProjectResponseDto;
-import com.cooksys.project_manager.dtos.UserRequestDto;
 import com.cooksys.project_manager.entities.Project;
 import com.cooksys.project_manager.entities.Team;
-import com.cooksys.project_manager.entities.User;
-import com.cooksys.project_manager.exceptions.*;
-import com.cooksys.project_manager.mappers.CredentialsMapper;
+import com.cooksys.project_manager.exceptions.BadRequestException;
 import com.cooksys.project_manager.mappers.ProjectMapper;
 import com.cooksys.project_manager.mappers.TeamMapper;
 import com.cooksys.project_manager.repositories.ProjectRepository;
 import com.cooksys.project_manager.repositories.TeamRepository;
-import com.cooksys.project_manager.repositories.UserRepository;
 import com.cooksys.project_manager.services.ProjectService;
 import com.cooksys.project_manager.services.ValidationService;
 
@@ -113,13 +108,15 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<ProjectResponseDto> getCompanyProjectsOfTeam(Long team_id) {
         Team team = getTeamWithId(team_id);
-        List<Project> projects = new ArrayList<>();
-        for (Project p : team.getProjects()) {
-            if (p.isActive()){
-                projects.add(p);
-            }
-        }
-        return projectMapper.entitiesToDtos(projects);
+        
+        // List<Project> projects = new ArrayList<>();
+        // for (Project p : team.getProjects()) {
+        //     if (p.isActive()){
+        //         projects.add(p);
+        //     }
+        // }
+        
+        return projectMapper.entitiesToDtos(team.getProjects());
     }
 
     @Override

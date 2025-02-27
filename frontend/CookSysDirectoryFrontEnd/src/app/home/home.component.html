@@ -9,7 +9,10 @@
           <span class="font-bold text-white font-mulish">{{ announcement.author.profile.firstName }} {{ announcement.author.profile.lastName }}</span>
         </div>
         <div class="absolute top-4 right-4">
-          <span class="text-white font-mulish">{{ announcement.date }}</span>
+          <span class="text-white font-mulish">{{ announcement.date | date: "MMMM d, y" }}</span>
+        </div>
+        <div class="text-white text-center font-inter mb-4">
+          <h3 class="text-2xl font-bold">{{ announcement.title }}</h3>
         </div>
         <div class="text-white text-center font-inter">
           {{ announcement.message }}
@@ -27,14 +30,17 @@
   <div class="bg-[#051622] p-8 rounded-lg shadow-lg w-full max-w-md sm:max-w-sm relative" (click)="$event.stopPropagation()">
     <button (click)="closeModal()" class="absolute top-2 right-2 text-red-600 text-2xl font-bold cursor-pointer">&times;</button>
     <h2 class="text-2xl font-bold mb-4 text-[#DEB992]">New Announcement</h2>
-    <form (submit)="onSubmit()" class="flex flex-col items-center">
+    <form (ngSubmit)="onSubmit()" class="flex flex-col items-center">
+      <div *ngIf="errorMessage" class="mb-4 w-full text-red-600 text-center">
+        {{ errorMessage }}
+      </div>
       <div class="mb-4 w-full">
         <label for="title" class="block text-[#DEB992]">Title</label>
-        <input type="text" id="title" class="mt-1 block w-full px-3 py-2 bg-transparent border-b-2 border-[#DEB992] focus:outline-none focus:border-indigo-500 sm:text-sm">
+        <input type="text" id="title" name="title" [(ngModel)]="title" class="mt-1 block w-full px-3 py-2 bg-transparent border-b-2 border-[#DEB992] focus:outline-none focus:border-indigo-500 sm:text-sm">
       </div>
       <div class="mb-4 w-full">
         <label for="message" class="block text-[#DEB992]">Message</label>
-        <textarea id="message" class="mt-1 block w-full px-3 py-2 bg-transparent border-b-2 border-[#DEB992] focus:outline-none focus:border-indigo-500 sm:text-sm"></textarea>
+        <textarea id="message" name="message" [(ngModel)]="message" class="mt-1 block w-full px-3 py-2 bg-transparent border-b-2 border-[#DEB992] focus:outline-none focus:border-indigo-500 sm:text-sm"></textarea>
       </div>
       <button type="submit" class="py-2 px-4 bg-[#1BA098] text-white rounded-[25px]">Submit</button>
     </form>

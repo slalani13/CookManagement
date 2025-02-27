@@ -1,1 +1,18 @@
-<p>create-project works!</p>
+<div *ngIf="active" class="w-screen h-screen fixed top-0 left-0 flex items-center justify-center">
+    <div class="w-96 bg-slate-800 text-white absolute z-10 p-6 flex flex-col items-center space-y-4">
+        <app-close-button routerLink="/competitive" (click)="close()" class="absolute top-4 right-4"></app-close-button>
+
+        <label class="block text-sm font-medium text-gray-300">Project Name</label>
+        <input type="text" [(ngModel)]="new_name" 
+            class="w-full bg-transparent border-b border-gray-400 text-white outline-none py-2 focus:border-teal-400">
+
+        <label class="block text-sm font-medium text-gray-300">Description</label>
+        <input type="text" [(ngModel)]="new_description" 
+            class="w-full bg-transparent border-b border-gray-400 text-white outline-none py-2 focus:border-teal-400">
+
+        <button (click)="addProjectToTeam()" 
+            class="w-full mt-6 bg-teal-500 hover:bg-teal-600 text-white py-2 rounded-md">
+            Submit
+        </button>
+    </div>
+</div>

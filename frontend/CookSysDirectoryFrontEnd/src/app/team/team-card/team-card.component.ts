@@ -14,8 +14,9 @@ export class TeamCardComponent {
     id: 0,
     name: '',
     users: [],
-    projects: []
   };
+  @Input() project: any[] = []
+
   id = 0;
   numProjects= 0;
 
@@ -25,7 +26,8 @@ export class TeamCardComponent {
     this.id = this.team.id
     console.log(this.id)
     console.log(this.team.users)
-    this.numProjects = this.team.projects ? this.team.projects.length : 0
+    this.numProjects = this.project.length
+    console.log(`team-card ${this.project}`)
 
     console.log('Team data in TeamCardComponent:', this.team);
   }

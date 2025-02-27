@@ -1,1 +1,47 @@
-<p>projects works!</p>
+<app-navbar></app-navbar>
+
+<div class="text-teal-300 flex flex-col items-center px-8 mt-30 w-full">
+    <!--<a href="#" class="self-start text-lg text-teal-400 hover:underline mt-20">&lt; Back </a>-->
+
+    <div class="flex justify-between items-center gap-8">
+        <h1 class="text-4xl font-semibold">Projects for Team {{team_id}}</h1>
+    
+        <button (click)="setCreating()" class="px-6 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">
+            New
+        </button>
+    </div>
+    
+
+    <div class="mt-8 w-screen">
+        <div *ngFor="let project of paginatedProjects" class="p-4 rounded-lg flex justify-center">
+            <app-project-component 
+                [project_id]="project.id"
+                [team_id]="team_id"
+                [name]="project.name" 
+                [description]="project.description" 
+                [active]="project.active"
+                (projectClosed)="closeMenu()"
+                (projectEdited)="closeMenuAndRefresh()"
+                class="w-2/3">
+            </app-project-component>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 flex justify-center mb-4 px-4 py-2 mr-2 gap-4">
+            <button (click)="prevPage()">
+                &lt; Prev
+            </button>
+            <h1>Page {{ currentPage }} of {{totalPages}} </h1>
+            <button (click)="nextPage()">
+                Next &gt;
+            </button>
+        </div>
+    </div>
+</div>
+
+<app-create-project
+[team_id]="team_id"
+[active]="creating_project"
+(closeMenu)="closeMenu()"
+(created)="closeMenuAndRefresh()">
+</app-create-project>
+

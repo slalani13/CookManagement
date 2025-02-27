@@ -1,4 +1,6 @@
 import { profileData } from "./profileData";
+import { Company } from "./company.model";
+import { teamResponseData } from "./teamData";
 
 export interface User {
     id: number;
@@ -7,6 +9,6 @@ export interface User {
     active: boolean;
     status: string;
     admin: boolean;
-    companies?: Object[];
-    teams?: Object[];
+    companies?: Company[];
+    teams?: teamResponseData[];
 }

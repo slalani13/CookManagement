@@ -31,10 +31,12 @@ public class User {
     @Embedded
     private Profile profile;
 
+    // deleted or not deleted
     private boolean isActive;
 
     private boolean isAdmin;
 
+    // logged in = 'active', logged out = 'inactive'
     private String status;
 
     @OneToMany(mappedBy = "author",

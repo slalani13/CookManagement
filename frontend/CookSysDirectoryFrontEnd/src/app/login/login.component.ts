@@ -21,6 +21,7 @@ export class LoginComponent {
     this.userService.login(this.username, this.password).pipe(
       tap((user: User) => {
         console.log(user);
+        this.userService.setUser(user);
         this.router.navigate(['/select-company']);
       }),
       catchError((error) => {
