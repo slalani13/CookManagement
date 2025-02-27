@@ -42,8 +42,8 @@ export class CompanyService {
     this.announcementsSource.next(announcements);
   }
 
-  createAnnouncement(announcement: Announcement) {
-    return this.http.post<Announcement>('http://localhost:8080/announcement', announcement).pipe(
+  createAnnouncement(announcement: { authorId: number, companyId: number, title: string, message: string }): Observable<Announcement> {
+    return this.http.post<Announcement>('http://localhost:8080/announcements', announcement).pipe(
       tap(announcement => {
         const currentAnnouncements = this.announcementsSource.value || [];
         this.announcementsSource.next([...currentAnnouncements, announcement]);

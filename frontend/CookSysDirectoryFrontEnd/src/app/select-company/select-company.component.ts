@@ -47,7 +47,6 @@ export class SelectCompanyComponent implements OnInit{
     // Fetch announcements for the selected company
     this.companyService.getAnnouncementsByCompanyId(Number(selectedCompanyId)).subscribe(announcements => {
       this.announcements = announcements;
-      console.log('Announcements for selected company:', this.announcements);
       this.companyService.setAnnouncements(announcements);
     });
     this.router.navigate(['/home']);
