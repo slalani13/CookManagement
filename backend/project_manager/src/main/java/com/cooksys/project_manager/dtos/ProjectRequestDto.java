@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ProjectRequestDto {
-    
-    private Long id;
 
     private String name;
 
@@ -16,5 +14,7 @@ public class ProjectRequestDto {
     private boolean active;
 
     private Long team;
+
+    private CredentialsDto credentials;
     
 }

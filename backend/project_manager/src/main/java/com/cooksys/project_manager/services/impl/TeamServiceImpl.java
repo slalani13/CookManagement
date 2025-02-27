@@ -96,8 +96,8 @@ public class TeamServiceImpl implements TeamService{
     }
 
     @Override
-    public TeamResponseDto createTeam(TeamRequestDto teamRequestDto, CredentialsDto credentialsDto) {
-        hasPermission(credentialsDto);
+    public TeamResponseDto createTeam(TeamRequestDto teamRequestDto) {
+        hasPermission(teamRequestDto.getCredentials());
         Team newTeam = teamRepository.save(teamMapper.requestDtoToEntity(teamRequestDto));
         newTeam.setName(teamRequestDto.getName());
         newTeam.setDescription(teamRequestDto.getDescription());
@@ -106,8 +106,8 @@ public class TeamServiceImpl implements TeamService{
     }
 
     @Override
-    public TeamResponseDto updateTeam(Long team_id, TeamRequestDto teamRequestDto, CredentialsDto credentialsDto) {
-        Team currTeam = validateTeamWithId(team_id, credentialsDto);
+    public TeamResponseDto updateTeam(Long team_id, TeamRequestDto teamRequestDto) {
+        Team currTeam = validateTeamWithId(team_id, teamRequestDto.getCredentials());
 
         // checking individual fields if they are null, do not replace a non-null field with a null field'
         if (teamRequestDto.getName() != null){
