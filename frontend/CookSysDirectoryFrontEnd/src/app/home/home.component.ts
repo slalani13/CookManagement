@@ -30,8 +30,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
    this.companyService.announcements$.subscribe(announcements => {
-      this.announcements = announcements || [];
-    });
+      if (announcements) {
+        this.announcements = announcements.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      }
+  });
    this.userService.getUser().subscribe(user => {
       this.user = user;
     });
@@ -59,7 +61,6 @@ export class HomeComponent implements OnInit {
       const companyId = this.company.id;
       this.companyService.createAnnouncement({ authorId, companyId, title: this.title, message: this.message }).subscribe({
         next: (announcement) => {
-          this.fetchAnnouncements();
           this.clearForm();
           this.closeModal();
         },
@@ -73,15 +74,6 @@ export class HomeComponent implements OnInit {
   clearForm() {
     this.title = '';
     this.message = '';
-  }
-
-  fetchAnnouncements(): void {
-    if (this.user && this.user.companies && this.user.companies.length > 0) {
-      const companyId = this.user.companies[0].id;
-      this.companyService.getAnnouncementsByCompanyId(companyId).subscribe(announcements => {
-        this.announcements = announcements.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-      });
-    }
   }
 
   get paginatedAnnouncements() {
