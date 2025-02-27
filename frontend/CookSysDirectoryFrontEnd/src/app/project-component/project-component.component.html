@@ -1,1 +1,32 @@
-<p>project-component works!</p>
+<div class="bg-gray-900 text-white shadow-lg rounded-xl p-4 border border-gray-700 w-full flex justify-between items-center">
+    <div class="text-left">
+        <h2 class="text-xl text-white">{{ name }}</h2>
+        <p [ngClass]="{'text-green-400': active, 'text-red-400': !active}" class="text-sm font-medium">
+            {{ active ? 'Active' : 'Inactive' }}
+        </p>
+        <p class="text-gray-400">{{ description }}</p>
+    </div>
+    
+    <div class="flex gap-4">
+        <button (click)="toProjectPage()" class="px-4 py-2 bg-yellow-200 text-black rounded-lg hover:bg-yellow-400">
+            Details
+        </button>
+
+        <button (click)="setEditing()" class="px-4 py-2 bg-yellow-200 text-black rounded-lg hover:bg-yellow-400">
+            Edit
+        </button>
+    </div>
+
+</div>
+
+
+<app-edit-project
+[project_description]="description"
+[project_name]="name"
+[isActive]="active"
+[team_id]="team_id"
+[project_id]="project_id"
+[active]="editing_project"
+(closeMenu)="closeMenu()"
+(edited)="closeMenuAndRefresh()">
+</app-edit-project>
