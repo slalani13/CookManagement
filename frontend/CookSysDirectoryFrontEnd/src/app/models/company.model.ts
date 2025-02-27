@@ -1,3 +1,4 @@
+import { teamResponseData } from "./teamData";
 import { User } from "./user.model";
 
 export interface Company {
@@ -5,5 +6,5 @@ export interface Company {
     name: string;
     description: string;
     users: User[];
-    teams: Object[];
+    teams: teamResponseData[];
 }

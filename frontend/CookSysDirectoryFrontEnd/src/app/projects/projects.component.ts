@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { CreateProjectComponent } from "../create-project/create-project.component";
 import { EditProjectComponent } from '../edit-project/edit-project.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -27,12 +27,16 @@ export class ProjectsComponent implements OnInit{
   currentPage = 1;
   itemsPerPage = 3;
   
-  constructor(){
+  constructor(private route: ActivatedRoute){
   }
 
   ngOnInit(): void {
     //this.fetchProjectsFromTeam();
-    //this.fetchProjectsFromTeam();
+    this.route.queryParams.subscribe(params => {
+      const team_id = Number(params['team_id']);
+      this.team_id = team_id;
+      this.fetchProjectsFromTeam();
+    });
   }
 
   fetchProjectsFromTeam(){
