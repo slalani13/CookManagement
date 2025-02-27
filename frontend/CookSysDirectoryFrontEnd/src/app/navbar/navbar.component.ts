@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../user.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,8 @@ import { UserService } from '../user.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  user: User | null = null;
 
   constructor(private userService: UserService) { }
 
@@ -19,6 +21,12 @@ export class NavbarComponent {
     menuButton?.addEventListener('click', () => {
       menu?.classList.toggle('show');
     });
+
+    this.userService.getUser().subscribe(user => {
+      this.user = user;
+      console.log(user);
+    });
+
   }
 
   handleLogout() {

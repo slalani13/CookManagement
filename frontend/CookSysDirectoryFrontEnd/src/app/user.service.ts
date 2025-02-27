@@ -28,8 +28,8 @@ export class UserService {
     this.userSource.next(user);
   }
 
-  getUser(): User | null {
-    return this.userSource.value;
+  getUser(): Observable<User | null> {
+    return this.user$;
   }
 
   setUser(user: User) {
