@@ -18,9 +18,9 @@ import lombok.RequiredArgsConstructor;
 public class AnnouncementController {
     private final AnnouncementService announcementService;
 
-    @GetMapping("/{id}/announcements")
-    public List<AnnouncementResponseDto> getAnnouncements(@PathVariable Long companyId) {
-        return announcementService.getAnnouncementsByCompanyId(companyId);
+    @GetMapping("/{id}")
+    public List<AnnouncementResponseDto> getAnnouncements(@PathVariable Long id) {
+        return announcementService.getAnnouncementsByCompanyId(id);
     }
 
     @GetMapping
@@ -28,7 +28,7 @@ public class AnnouncementController {
         return null;
     }
 
-    @PostMapping("/announcement")
+    @PostMapping
     public AnnouncementResponseDto createAnnouncement(@RequestBody AnnouncementRequestDto announcementRequestDto) {
         return announcementService.createAnnouncement(announcementRequestDto);
     }
