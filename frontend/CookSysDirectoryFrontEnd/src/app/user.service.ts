@@ -16,12 +16,16 @@ export class UserService {
 
   login(username: string, password: string): Observable<User> {
     return this.http.post<User>('http://localhost:8080/users/login', { username, password }).pipe(
-      tap(user => this.userSource.next(user))
+      tap(user => {
+        this.userSource.next(user);
+      })
     )
   }
 
-  logout() {
-    this.userSource.next(null);
+  logout(user: User): Observable<void> {
+    return this.http.post<void>('http://localhost:8080/users/logout', { body: user }).pipe(
+      tap(() => this.userSource.next(null))
+    );
   }
 
   updateUser(user: User) {

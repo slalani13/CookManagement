@@ -45,4 +45,10 @@ public class UserController {
     public FullUserDto deactivateUser(@PathVariable Long id) {
         return userService.deleteUser(id);
     }
+
+    @PostMapping("/logout")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void logoutUser(@RequestBody FullUserDto fullUserDto) {
+        userService.logoutUser(fullUserDto);
+    }
 }

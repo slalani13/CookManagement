@@ -18,4 +18,6 @@ public interface UserService {
     FullUserDto getUserById(Long id);
 
     FullUserDto updateUserProfile(Long id, Profile profile);
+
+    void logoutUser(FullUserDto fullUserDto);
 }

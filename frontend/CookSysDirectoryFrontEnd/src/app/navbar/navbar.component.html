@@ -13,7 +13,7 @@
         <a routerLink="/company" class="text-[#1BA098]">Company</a>
         <a routerLink="/team" class="text-[#1BA098]">Team</a>
         <a routerLink="/users" class="text-[#1BA098]">Users</a>
-        <a routerLink="/" (click)="handleLogout() "class="text-[#1BA098]">Logout</a>
+        <a routerLink="/" (click)="handleLogout($event) "class="text-[#1BA098]">Logout</a>
       </div>
       <div class="md:hidden">
         <button id="menu-button" class="text-[#1BA098] focus:outline-none" (click)="toggleMenu()">
@@ -28,6 +28,6 @@
       <a routerLink="/company" class="text-[#1BA098] border-b-2 border-[#DEB992]">Company</a>
       <a routerLink="/team" class="text-[#1BA098] border-b-2 border-[#DEB992]">Team</a>
       <a routerLink="/users" class="text-[#1BA098] border-b-2 border-[#DEB992]">Users</a>
-      <a routerLink="/" class="text-[#1BA098] border-b-2 border-[#DEB992]">Logout</a>
+      <a routerLink="/" (click)="handleLogout($event)" class="text-[#1BA098] border-b-2 border-[#DEB992]">Logout</a>
     </div>
 </nav>
