@@ -17,6 +17,7 @@ export interface projectResponseData{
     content:string
 }
 
-export interface projectContent{
+export interface contentRequestData{
     content:string
+    credentials:credentialsData
 }

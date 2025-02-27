@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.cooksys.project_manager.dtos.ContentRequestDto;
 import com.cooksys.project_manager.dtos.CredentialsDto;
 import com.cooksys.project_manager.dtos.ProjectRequestDto;
 import com.cooksys.project_manager.dtos.ProjectResponseDto;
@@ -127,6 +128,18 @@ public class ProjectServiceImpl implements ProjectService {
         teamRepository.save(currTeam);
         projectRepository.delete(currProject);
         return String.format("Project with id %d was deleted successfully", project_id);
+    }
+
+    @Override
+    public ProjectResponseDto updateProjectContent(Long project_id, ContentRequestDto contentRequestDto) {
+        hasPermission(contentRequestDto.getCredentials());
+        Project currProject = getProjectWithId(project_id);
+
+        if (contentRequestDto.getContent() != null){
+            currProject.setContent(contentRequestDto.getContent());
+        }
+        
+        return projectMapper.entityToResponseDto(projectRepository.save(currProject));
     }
     
 }

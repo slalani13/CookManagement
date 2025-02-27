@@ -1,5 +1,5 @@
 import { fetchData } from "./fetchService";
-import { projectRequestData } from "../models/projectData";
+import { contentRequestData, projectRequestData } from "../models/projectData";
 import { credentialsData } from "../models/credentialsData";
 
 export async function getProjectsFromTeam(team_id:number){
@@ -16,6 +16,24 @@ export async function getProjectsFromTeam(team_id:number){
 
     }).catch(() => {
     console.log("getting projects failed for team id: "+team_id);
+    return [];
+    })
+}
+
+export async function getProject(project_id:number){
+    return fetchData({
+    endpoint: `projects/${project_id}`,
+    }).then((response) => {
+    if (response) {
+        return response
+    }
+    else{
+        console.log("getting project failed for project id: "+project_id);
+        return [];
+    }
+
+    }).catch(() => {
+    console.log("getting project failed for project id: "+project_id);
     return [];
     })
 }
@@ -77,6 +95,27 @@ export async function updateProject(project_id:number, projectRequest:projectReq
 
     }).catch(() => {
     console.log("updating project failed for project id: "+project_id);
+    return [];
+    })
+}
+
+export async function updateProjectContent(project_id:number, contentRequest:contentRequestData){
+    return fetchData({
+    endpoint: `projects/${project_id}/content`,
+    method: "PATCH",
+    body: JSON.stringify(contentRequest),
+    headers: {"Content-Type": "application/json"},
+    }).then((response) => {
+    if (response) {
+        return response
+    }
+    else{
+        console.log("updating project content failed for project id: "+project_id);
+        return [];
+    }
+
+    }).catch(() => {
+    console.log("updating project content failed for project id: "+project_id);
     return [];
     })
 }
