@@ -24,10 +24,18 @@ export class CompanyService {
     )
   }
 
+  setCompany(company: Company) {
+    this.companySource.next(company);
+  }
+
   getAnnouncementsByCompanyId(companyId: number) {
     return this.http.get<Announcement[]>(`http://localhost:8080/announcements/${companyId}`).pipe(
       tap(announcements => this.announcementsSource.next(announcements))
     )
+  }
+
+  setAnnouncements(announcements: Announcement[]) {
+    this.announcementsSource.next(announcements);
   }
 
   createAnnouncement(announcement: Announcement) {

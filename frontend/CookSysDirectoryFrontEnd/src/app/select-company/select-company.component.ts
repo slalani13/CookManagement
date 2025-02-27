@@ -38,12 +38,14 @@ export class SelectCompanyComponent implements OnInit{
     this.companyService.getCompanyById(Number(selectedCompanyId)).subscribe(company => {
       this.selectedCompany = company;
       console.log('Selected company details:', this.selectedCompany);
+      this.companyService.setCompany(company);
     });
 
     // Fetch announcements for the selected company
     this.companyService.getAnnouncementsByCompanyId(Number(selectedCompanyId)).subscribe(announcements => {
       this.announcements = announcements;
       console.log('Announcements for selected company:', this.announcements);
+      this.companyService.setAnnouncements(announcements);
     });
     this.router.navigate(['/home']);
   }
