@@ -1,0 +1,27 @@
+<div class="container mx-auto p-6">
+  <div class="overflow-x-auto">
+    <table class="min-w-full table-auto bg-[#051622] border border-[#DEB992] rounded-lg shadow-md" *ngIf="users.length > 0; else noUsers">
+      <thead>
+        <tr class="text-left border-b">
+          <th class="px-4 py-2 text-sm font-semibold text-[#DEB992]">Name</th>
+          <th class="px-4 py-2 text-sm font-semibold text-[#DEB992]">Email</th>
+          <th class="px-4 py-2 text-sm font-semibold text-[#DEB992]">Active</th>
+          <th class="px-4 py-2 text-sm font-semibold text-[#DEB992]">Admin</th>
+          <th class="px-4 py-2 text-sm font-semibold text-[#DEB992]">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users" class="border-b hover:bg-[#0B2D45]">
+          <td class="px-4 py-2 text-sm text-white">{{ user.profile.firstName }}</td>
+          <td class="px-4 py-2 text-sm text-white">{{ user.profile.email }}</td>
+          <td class="px-4 py-2 text-sm text-white">{{ user.active ? 'Yes' : 'No' }}</td>
+          <td class="px-4 py-2 text-sm text-white">{{ user.admin ? 'Yes' : 'No' }}</td>
+          <td class="px-4 py-2 text-sm text-white">{{ user.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noUsers>
+      <p class="text-center text-white text-sm">No users found.</p>
+    </ng-template>
+  </div>
+</div>
