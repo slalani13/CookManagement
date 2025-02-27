@@ -41,13 +41,13 @@ public class TeamController {
     }
 
     @PostMapping
-    public TeamResponseDto createTeam(@RequestBody TeamRequestDto teamRequestDto, @RequestBody CredentialsDto credentialsDto) {
-        return teamService.createTeam(teamRequestDto, credentialsDto);
+    public TeamResponseDto createTeam(@RequestBody TeamRequestDto teamRequestDto) {
+        return teamService.createTeam(teamRequestDto);
     }
 
     @PatchMapping("/{team_id}/update")
-    public TeamResponseDto updateTeam(@PathVariable Long team_id, @RequestBody TeamRequestDto teamRequestDto, @RequestBody CredentialsDto credentialsDto) {
-        return teamService.updateTeam(team_id, teamRequestDto, credentialsDto);
+    public TeamResponseDto updateTeam(@PathVariable Long team_id, @RequestBody TeamRequestDto teamRequestDto) {
+        return teamService.updateTeam(team_id, teamRequestDto);
     }
 
     @PatchMapping("/{team_id}/add/{user_id}")

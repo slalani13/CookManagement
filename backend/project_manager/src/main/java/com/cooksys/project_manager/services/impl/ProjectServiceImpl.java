@@ -79,11 +79,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectResponseDto createProject(Long team_id, ProjectRequestDto projectRequestDto, CredentialsDto credentialsDto) {
-        hasPermission(credentialsDto);
+    public ProjectResponseDto createProject(Long team_id, ProjectRequestDto projectRequestDto) {
+        hasPermission(projectRequestDto.getCredentials());
         Team currTeam = getTeamWithId(team_id);
         Project newProject = projectRepository.save(projectMapper.requestDtoToEntity(projectRequestDto));
-        newProject.setActive(false);
+        newProject.setActive(true);
         newProject.setName(projectRequestDto.getName());
         newProject.setDescription(projectRequestDto.getDescription());
         newProject.setTeam(projectRequestDto.getTeam());
@@ -93,10 +93,9 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectResponseDto updateProject(Long project_id, ProjectRequestDto projectRequestDto,
-            CredentialsDto credentialsDto) {
+    public ProjectResponseDto updateProject(Long project_id, ProjectRequestDto projectRequestDto) {
         
-        hasPermission(credentialsDto);
+        hasPermission(projectRequestDto.getCredentials());
         Project currProject = getProjectWithId(project_id);
 
         // checking individual fields if they are null, do not replace a non-null field with a null field'

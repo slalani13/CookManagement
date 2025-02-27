@@ -1,8 +1,11 @@
+import { credentialsData } from "./credentialsData";
+
 export interface projectData{
     name:string,
     description:string,
-    active:boolean,
     team:number,
+    active:boolean,
+    credentials:credentialsData,
 }
 
 export interface projectContent{

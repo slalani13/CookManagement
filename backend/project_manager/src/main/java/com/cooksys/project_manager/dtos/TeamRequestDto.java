@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 
 public class TeamRequestDto {
     
-    private Long id;
-    
     private String name;
 
     private String description;
 
     private Long company;
+
+    private CredentialsDto credentials;
     
 }

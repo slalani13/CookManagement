@@ -18,8 +18,8 @@ public interface TeamService {
     List<TeamResponseDto> getAllTeams();
     TeamResponseDto getTeam(Long team_id);
     List<TeamResponseDto> getTeamsOfCompany(Long company_id);
-    TeamResponseDto createTeam(TeamRequestDto teamRequestDto, CredentialsDto credentialsDto);
-    TeamResponseDto updateTeam(Long team_id, TeamRequestDto teamRequestDto, CredentialsDto credentialsDto);
+    TeamResponseDto createTeam(TeamRequestDto teamRequestDto);
+    TeamResponseDto updateTeam(Long team_id, TeamRequestDto teamRequestDto);
     TeamResponseDto addToTeam(Long team_id, Long user_id, CredentialsDto credentialsDto);
     TeamResponseDto removeFromTeam(Long team_id, Long user_id, CredentialsDto credentialsDto);
     String deleteTeam(Long team_id, CredentialsDto credentialsDto);

@@ -41,14 +41,13 @@ public class ProjectController {
     }
 
     @PostMapping("/teams/{team_id}")
-    public ProjectResponseDto createProject(@PathVariable Long team_id, @RequestBody ProjectRequestDto projectRequestDto, @RequestBody CredentialsDto credentialsDto) {
-        return projectService.createProject(team_id, projectRequestDto, credentialsDto);
+    public ProjectResponseDto createProject(@PathVariable Long team_id, @RequestBody ProjectRequestDto projectRequestDto) {
+        return projectService.createProject(team_id, projectRequestDto);
     }
 
     @PatchMapping("/{project_id}")
-    public ProjectResponseDto updateProject(@PathVariable Long project_id, @RequestBody ProjectRequestDto projectRequestDto, 
-                                            @RequestBody CredentialsDto credentialsDto) {                 
-        return projectService.updateProject(project_id, projectRequestDto, credentialsDto);
+    public ProjectResponseDto updateProject(@PathVariable Long project_id, @RequestBody ProjectRequestDto projectRequestDto) {                 
+        return projectService.updateProject(project_id, projectRequestDto);
     }
     
     @DeleteMapping("/{project_id}")

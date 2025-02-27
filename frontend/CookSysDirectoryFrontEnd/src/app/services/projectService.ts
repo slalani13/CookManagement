@@ -1,53 +1,6 @@
-import { List, toPairs } from "lodash";
+import { fetchData } from "./fetchService";
 import { projectData } from "../models/projectData";
-import "whatwg-fetch";
 import { credentialsData } from "../models/credentialsData";
-
-const BASE_URL = "http://localhost:8080";
-
-/**
- * Parses the JSON returned by a network request
- *
- * @param  {object} response A response from a network request
- *
- * @return {object} The parsed JSON from the request
- */
-const parseJSON = (response: any) => {
-  if (response.status === 204 || response.status === 205) {
-    return null;
-  }
-  return response.json();
-};
-
-/**
- * Requests a URL, returning a promise
- *
- * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
- *
- * @return {object}           The response data
- */
-export const request = (url: any, options?: any) => {
-    return fetch(url, options).then(parseJSON);
-};
-
-const fetchData = ({ endpoint, method="GET", body, headers }: any) => {
-    let url = [BASE_URL, endpoint].join("/");
-    console.log("project url: "+url);
-    if (headers) {
-        const paramString = toPairs(headers)
-        .map((param: any) => param.join("="))
-        .join("&");
-        url += `?${paramString}`;
-    }
-    const options: RequestInit = {
-        method,
-        headers,
-        body
-    };
-    return request(url, options);
-};
-
 
 export async function getProjectsFromTeam(team_id:number){
     return fetchData({
@@ -86,11 +39,12 @@ export async function getAllProjects(){
 }
 
 
-export async function createProject(team_id:number, projectRequest:projectData, credentialsRequest: credentialsData){
+export async function createProject(team_id:number, projectRequest:projectData){
     return fetchData({
     endpoint: `projects/teams/${team_id}`,
     method: "POST",
-    body: JSON.stringify({ projectRequest, credentialsRequest }),
+    body: JSON.stringify(projectRequest),
+    headers: {"Content-Type": "application/json"},
     }).then((response) => {
     if (response) {
         return response
@@ -102,6 +56,48 @@ export async function createProject(team_id:number, projectRequest:projectData, 
 
     }).catch(() => {
     console.log("creating project failed failed for team id: "+team_id);
+    return [];
+    })
+}
+
+export async function updateProject(project_id:number, projectRequest:projectData){
+    return fetchData({
+    endpoint: `${project_id}`,
+    method: "PATCH",
+    body: JSON.stringify(projectRequest),
+    headers: {"Content-Type": "application/json"},
+    }).then((response) => {
+    if (response) {
+        return response
+    }
+    else{
+        console.log("updating project failed for project id: "+project_id);
+        return [];
+    }
+
+    }).catch(() => {
+    console.log("updating project failed for project id: "+project_id);
+    return [];
+    })
+}
+
+export async function deleteProject(project_id:number, credentialsRequest: credentialsData){
+    return fetchData({
+    endpoint: `${project_id}`,
+    method: "DELETE",
+    body: JSON.stringify(credentialsRequest),
+    headers: {"Content-Type": "application/json"},
+    }).then((response) => {
+    if (response) {
+        return response
+    }
+    else{
+        console.log("deleting project failed for project id: "+project_id);
+        return [];
+    }
+
+    }).catch(() => {
+    console.log("deleting project failed for project id: "+project_id);
     return [];
     })
 }

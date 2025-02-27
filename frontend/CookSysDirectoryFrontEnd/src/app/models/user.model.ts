@@ -1,14 +1,9 @@
-export interface ProfileDto {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-}
+import { profileData } from "./profileData";
 
 export interface User {
     id: number;
     username: string;
-    profile: ProfileDto;
+    profile: profileData;
     active: boolean;
     status: string;
     admin: boolean;
