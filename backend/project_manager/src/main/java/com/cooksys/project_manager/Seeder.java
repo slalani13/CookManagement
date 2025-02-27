@@ -123,13 +123,13 @@ public class Seeder implements CommandLineRunner {
         Team team1 = new Team();
         team1.setName("Development Team");
         team1.setDescription("Handles all development");
-        team1.setCompany(company);
+        team1.setCompany(company.getId());
         team1.setUsers(new ArrayList<>(List.of(user1, user2)));
 
         Team team2 = new Team();
         team2.setName("QA Team");
         team2.setDescription("Ensures quality");
-        team2.setCompany(company);
+        team2.setCompany(company.getId());
         team2.setUsers(new ArrayList<>(List.of(user3, user4)));
 
         teamRepository.saveAll(List.of(team1, team2));
@@ -139,13 +139,13 @@ public class Seeder implements CommandLineRunner {
         project1.setName("Project Alpha");
         project1.setDescription("An innovative project");
         project1.setActive(true);
-        project1.setTeam(team1);
+        project1.setTeam(team1.getId());
 
         Project project2 = new Project();
         project2.setName("Project Beta");
         project2.setDescription("A high-priority project");
         project2.setActive(true);
-        project2.setTeam(team2);
+        project2.setTeam(team2.getId());
 
         projectRepository.saveAll(List.of(project1, project2));
 

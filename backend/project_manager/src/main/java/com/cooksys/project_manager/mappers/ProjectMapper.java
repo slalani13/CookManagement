@@ -8,7 +8,7 @@ import com.cooksys.project_manager.dtos.ProjectRequestDto;
 import com.cooksys.project_manager.dtos.ProjectResponseDto;
 import com.cooksys.project_manager.entities.Project;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = { CredentialsMapper.class })
 public interface ProjectMapper {
     
     Project requestDtoToEntity(ProjectRequestDto projectRequestDto);

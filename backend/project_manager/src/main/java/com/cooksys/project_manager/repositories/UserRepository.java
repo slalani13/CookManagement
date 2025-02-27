@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 // >>>>>>> dev
+import com.cooksys.project_manager.dtos.FullUserDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -25,7 +26,7 @@ public interface UserRepository extends JpaRepository<User, Long>{
 
 //     User findByIdAndIsActiveTrue(Long id);
     Optional<User> findByCredentialsUsernameAndIsActiveTrue(String username);
-    List<User> findAllByIdAndIsActiveFalse(Long id);
+    List<User> findAllByIdAndIsActiveTrue(Long id);
     Optional<User> findByIdAndIsActiveTrue(Long id);
 
 }

@@ -79,24 +79,23 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectResponseDto createProject(Long team_id, ProjectRequestDto projectRequestDto, CredentialsDto credentialsDto) {
-        hasPermission(credentialsDto);
+    public ProjectResponseDto createProject(Long team_id, ProjectRequestDto projectRequestDto) {
+        hasPermission(projectRequestDto.getCredentials());
         Team currTeam = getTeamWithId(team_id);
         Project newProject = projectRepository.save(projectMapper.requestDtoToEntity(projectRequestDto));
-        newProject.setActive(false);
+        newProject.setActive(true);
         newProject.setName(projectRequestDto.getName());
         newProject.setDescription(projectRequestDto.getDescription());
-        newProject.setTeam(teamMapper.responseDtoToEntity(projectRequestDto.getTeam()));
+        newProject.setTeam(projectRequestDto.getTeam());
         currTeam.getProjects().add(newProject);
         teamRepository.save(currTeam);
         return projectMapper.entityToResponseDto(projectRepository.save(newProject));
     }
 
     @Override
-    public ProjectResponseDto updateProject(Long project_id, ProjectRequestDto projectRequestDto,
-            CredentialsDto credentialsDto) {
+    public ProjectResponseDto updateProject(Long project_id, ProjectRequestDto projectRequestDto) {
         
-        hasPermission(credentialsDto);
+        hasPermission(projectRequestDto.getCredentials());
         Project currProject = getProjectWithId(project_id);
 
         // checking individual fields if they are null, do not replace a non-null field with a null field'
@@ -126,7 +125,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public String fullyDeleteProject(Long project_id, CredentialsDto credentialsDto) {
         Project currProject = validateProjectWithId(project_id, credentialsDto);
-        Team currTeam = getTeamWithId(currProject.getTeam().getId());
+        Team currTeam = getTeamWithId(currProject.getTeam());
         currTeam.getProjects().remove(currProject);
         teamRepository.save(currTeam);
         projectRepository.delete(currProject);

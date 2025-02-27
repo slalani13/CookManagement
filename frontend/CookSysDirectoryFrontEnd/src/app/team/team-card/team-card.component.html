@@ -1,0 +1,25 @@
+<div class="cursor-pointer flex flex-col items-center flex-1 min-w-[21%] my-5 w-[320px] h-[250px] box-border rounded-[20px] 
+            bg-[#0b2d45] shadow-[0px_0px_6px_black] transition-all duration-300 hover:bg-[rgba(11,_45,_69,_0.8)]" (click)="onSubmit()">
+    <div class="flex flex-row items-center justify-between w-[85%]">
+        <h3 class="text-white">
+            {{ team.name }}
+        </h3>
+        <div class="text-[rgba(255,_255_255,_.06)]">
+            {{ "# of Projects: " + numProjects }}
+        </div>
+    </div>
+    <div class="flex border-t border-[var(--beige)] w-full items-center justify-center py-2.5 text-[rgba(255,_255,_255,_0.6)]">
+        <div class="employee-title">Members</div>
+    </div>
+    <div class="grid grid-cols-2 gap-2.5 justify-center w-[80%] h-[90%]">
+        <div *ngFor="let employee of team.employees">
+            <div class="flex items-center justify-center w-[110px] h-[35px] min-h-[35px] rounded-[10px] bg-[var(--blue-text)] my-2.5 shadow-[0px_0px_5px_rgba(0,_0,_0,_0.292)]">
+                <div class="w-full">
+                    <h3 class="text-center text-white text-[16px] font-normal m-0">
+                        {{ employee}}
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

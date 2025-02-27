@@ -11,6 +11,8 @@ public class ProjectResponseDto {
 
     private String description;
 
-    private TeamResponseDto team;
+    private Long team;
+
+    private boolean active;
 
 }

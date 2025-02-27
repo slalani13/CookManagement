@@ -27,9 +27,7 @@ public class Team {
 
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
-    private Company company;
+    private Long company;
 
     private boolean isDeleted;
 

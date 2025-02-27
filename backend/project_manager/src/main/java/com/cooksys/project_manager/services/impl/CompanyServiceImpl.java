@@ -9,6 +9,7 @@ import com.cooksys.project_manager.services.CompanyService;
 import com.cooksys.project_manager.dtos.AnnouncementResponseDto;
 import com.cooksys.project_manager.dtos.CompanyRequestDto;
 import com.cooksys.project_manager.dtos.CompanyResponseDto;
+import com.cooksys.project_manager.dtos.FullUserDto;
 import com.cooksys.project_manager.dtos.TeamRequestDto;
 import com.cooksys.project_manager.dtos.UserResponseDto;
 import com.cooksys.project_manager.entities.Company;
@@ -59,8 +60,8 @@ public class CompanyServiceImpl implements CompanyService{
     // If the company id provided does not match an active company in the database,
     // an error should be sent in lieu of a response.
     @Override
-    public List<UserResponseDto> getUsers(Long id) {
-        return userMapper.entitiesToDto(userRepository.findAllByIdAndIsActiveFalse(id));
+    public List<FullUserDto> getUsers(Long id) {
+        return userMapper.entitiesToDto(userRepository.findAllByIdAndIsActiveTrue(id));
     }
 
     @Override
