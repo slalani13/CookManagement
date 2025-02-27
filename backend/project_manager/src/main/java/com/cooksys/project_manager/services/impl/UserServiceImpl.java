@@ -1,6 +1,7 @@
 package com.cooksys.project_manager.services.impl;
 
 import com.cooksys.project_manager.dtos.CredentialsDto;
+import com.cooksys.project_manager.dtos.FullUserDto;
 import com.cooksys.project_manager.dtos.UserRequestDto;
 import com.cooksys.project_manager.dtos.UserResponseDto;
 import com.cooksys.project_manager.entities.Credentials;
@@ -18,6 +19,7 @@ import com.cooksys.project_manager.services.UserService;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -31,7 +33,7 @@ public class UserServiceImpl implements UserService {
     private final ProfileMapper profileMapper;
 
     @Override
-    public UserResponseDto createUser(UserRequestDto userRequestDto) {
+    public FullUserDto createUser(UserRequestDto userRequestDto) {
         User user = userMapper.requestDtoToEntity(userRequestDto);
         // check that profile, credentials, and admin aren't null
         // Validate required fields
@@ -45,8 +47,10 @@ public class UserServiceImpl implements UserService {
         user.setActive(true);
         user.setStatus("inactive");
         user.setAdmin(user.isAdmin());
+        user.setCompanies(new ArrayList<>());
+        user.setTeams(new ArrayList<>());
         userRepository.save(user);
-        UserResponseDto response = userMapper.entityToResponseDto(user);
+        FullUserDto response = userMapper.entityToFullUserDto(user);
         System.out.println("Returning response: " + response);
         return response;
     }
