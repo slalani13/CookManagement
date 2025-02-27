@@ -40,6 +40,16 @@ export class UsersRegComponent implements OnInit{
 
   closeModal() {
     this.showModal = false;
+    this.updateUsers();
+  }
+
+  updateUsers() {
+    this.companyService.getCompanyById(Number(this.companyService.getCompanyId())).subscribe(company => {
+      console.log("Company: " + company);
+      this.company = company;
+      this.users = [...company.users];
+      console.log("Users: " + this.users);
+    });
   }
 
 }
