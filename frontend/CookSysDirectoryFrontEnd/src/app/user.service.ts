@@ -20,6 +20,10 @@ export class UserService {
     )
   }
 
+  logout() {
+    this.userSource.next(null);
+  }
+
   updateUser(user: User) {
     this.userSource.next(user);
   }

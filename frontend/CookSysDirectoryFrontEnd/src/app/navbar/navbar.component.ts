@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +10,8 @@ import { RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
 
+  constructor(private userService: UserService) { }
+
   ngOnInit(): void {
     const menuButton = document.getElementById('menu-button');
     const menu = document.getElementById('menu');
@@ -16,6 +19,11 @@ export class NavbarComponent {
     menuButton?.addEventListener('click', () => {
       menu?.classList.toggle('show');
     });
+  }
+
+  handleLogout() {
+   this.userService.logout();
+   console.log(this.userService.getUser());
   }
 
 }
