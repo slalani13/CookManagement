@@ -30,11 +30,11 @@
     color: #fff;
   }
   
-  .projects-count {
+  .projects-num {
     color: rgba(255, 255, 255, 0.6);
   }
   
-  .member-container {
+  .employee-container {
     display: grid;
     grid-template-columns: 120px 120px;
     grid-row-gap: 10px;
@@ -45,7 +45,7 @@
     height: 90%;
   }
   
-  .member-header {
+  .employee-header {
     display: flex;
     border-top: 1px solid var(--beige);
     width: 100%;
@@ -55,11 +55,11 @@
     color: rgba(255, 255, 255, 0.6);
   }
   
-  .member-title {
+  .employee-title {
     align-self: center;
   }
   
-  .member-item {
+  .employee-item {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,7 +72,7 @@
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.292);
   }
   
-  .member-name-container {
+  .employee-name-container {
     width: 100%;
   }
   
