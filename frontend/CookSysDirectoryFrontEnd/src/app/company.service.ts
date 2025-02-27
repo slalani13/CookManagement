@@ -5,6 +5,7 @@ import { tap } from 'rxjs';
 import { Company } from './models/company.model';
 import { Announcement } from './models/announcement.model';
 import {User} from './models/user.model';
+import { credentialsData } from './models/credentialsData';
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +67,12 @@ export class CompanyService {
 
   getCompanyId():number | null{
     return this.selectedCompanyIdSource.value;
+  }
+
+  addUserToCompany(companyId: number, credentials: credentialsData) {
+    return this.http.patch<Company>(`http://localhost:8080/company/${companyId}/add-user`, credentials).pipe(
+      tap(company => this.companySource.next(company))
+    );
   }
 
 }

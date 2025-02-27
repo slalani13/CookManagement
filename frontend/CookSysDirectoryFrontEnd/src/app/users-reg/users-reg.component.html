@@ -13,7 +13,8 @@
   <p *ngIf="users === null || users.length === 0 " class="text-center text-white text-sm">No users found for the selected company.</p>
 
   <!-- Add User button -->
-  <button class="mt-6 px-6 py-2 bg-[#DEB992] text-[#051622] rounded-lg hover:bg-[#c8a665] transition-all">
+  <button (click)="openModal()" class="mt-6 px-6 py-2 bg-[#DEB992] text-[#051622] rounded-lg hover:bg-[#c8a665] transition-all">
     Add User
   </button>
+  <app-add-user-modal *ngIf="showModal" [isModalVisible]="showModal" (modalClose)="closeModal()"></app-add-user-modal>
 </div>
