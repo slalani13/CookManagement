@@ -42,8 +42,8 @@ export class CompanyService {
     this.announcementsSource.next(announcements);
   }
 
-  createAnnouncement(announcement: Announcement) {
-    return this.http.post<Announcement>('http://localhost:8080/announcement', announcement).pipe(
+  createAnnouncement(announcement: { authorId: number, companyId: number, title: string, message: string }): Observable<Announcement> {
+    return this.http.post<Announcement>('http://localhost:8080/announcements', announcement).pipe(
       tap(announcement => {
         const currentAnnouncements = this.announcementsSource.value || [];
         this.announcementsSource.next([...currentAnnouncements, announcement]);
@@ -53,6 +53,7 @@ export class CompanyService {
   // Set the selected company ID
   setSelectedCompanyId(companyId: number) {
     this.selectedCompanyIdSource.next(companyId);
+    console.log("Company source companyId: " + this.selectedCompanyIdSource.value);
   }
 
   getUsersByCompanyId() {
@@ -61,6 +62,10 @@ export class CompanyService {
     return this.http.get<User[]>(`http://localhost:8080/company/${companyId}/users`);
   }
   return of([]); // Return an Observable of an empty array
+  }
+
+  getCompanyId():number | null{
+    return this.selectedCompanyIdSource.value;
   }
 
 }

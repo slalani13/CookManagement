@@ -3,25 +3,45 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { Announcement } from '../models/announcement.model';
 import { CompanyService } from '../company.service';
+import { User } from '../models/user.model';
+import { Company } from '../models/company.model';
+import { UserService } from '../user.service';
+import { FormsModule } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule, NavbarComponent, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
   showModal = false;
   announcements: Announcement[] = [];
+  company = {} as Company;
   currentPage = 1;
   itemsPerPage = 10;
+  user: User | null = null;
+  title: string = '';
+  message: string = '';
+  errorMessage: string = '';
 
-  constructor(private companyService: CompanyService) {}
+  constructor(private companyService: CompanyService, private userService: UserService) {}
 
   ngOnInit(): void {
    this.companyService.announcements$.subscribe(announcements => {
-      this.announcements = announcements || [];
-      console.log('Announcements:', this.announcements);
+      if (announcements) {
+        this.announcements = announcements.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      }
+  });
+   this.userService.getUser().subscribe(user => {
+      this.user = user;
+    });
+    this.companyService.company$.subscribe(company => {
+      if (company) {
+        this.companyService.getAnnouncementsByCompanyId(company.id).subscribe();
+        this.company = company;
+      }
     });
   }
 
@@ -32,13 +52,28 @@ export class HomeComponent implements OnInit {
 
   closeModal() {
     this.showModal = false;
+    this.errorMessage = '';
   }
 
   onSubmit() {
-    // Handle form submission logic here
+    if (this.user && this.user.id && this.user.companies && this.user.companies.length > 0) {
+      const authorId = this.user.id;
+      const companyId = this.company.id;
+      this.companyService.createAnnouncement({ authorId, companyId, title: this.title, message: this.message }).subscribe({
+        next: (announcement) => {
+          this.clearForm();
+          this.closeModal();
+        },
+        error: (error: HttpErrorResponse) => {
+          this.errorMessage = error.error.message || 'An error occurred while creating the announcement.';
+        }
+      });
+    }
+  }
 
-    // call service and save company id inside my service.ts
-    this.closeModal();
+  clearForm() {
+    this.title = '';
+    this.message = '';
   }
 
   get paginatedAnnouncements() {

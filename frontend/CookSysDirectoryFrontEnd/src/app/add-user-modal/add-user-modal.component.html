@@ -1,0 +1,82 @@
+<!-- Modal Overlay -->
+<div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+  <!-- Modal Content -->
+  <div class="bg-[#051622] p-6 rounded-lg w-96 shadow-md">
+    <h2 class="text-xl mb-4 text-[#DEB992] text-center">Add New User</h2>
+
+    <!-- User Info Form -->
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <label for="firstName" class="block text-sm text-[#DEB992]">First Name:</label>
+        <input
+          id="firstName"
+          [(ngModel)]="firstName"
+          name="firstName"
+          required
+          class="w-full p-2 mt-2 border border-[#DEB992] rounded-md text-white bg-[#051622]"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label for="lastName" class="block text-sm text-[#DEB992]">Last Name:</label>
+        <input
+          id="lastName"
+          [(ngModel)]="lastName"
+          name="lastName"
+          required
+          class="w-full p-2 mt-2 border border-[#DEB992] rounded-md text-white bg-[#051622]"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label for="email" class="block text-sm text-[#DEB992]">Email:</label>
+        <input
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          type="email"
+          required
+          class="w-full p-2 mt-2 border border-[#DEB992] rounded-md text-white bg-[#051622]"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label for="phone" class="block text-sm text-[#DEB992]">Phone:</label>
+        <input
+          id="phone"
+          [(ngModel)]="phone"
+          name="phone"
+          type="tel"
+          required
+          class="w-full p-2 mt-2 border border-[#DEB992] rounded-md text-white bg-[#051622]"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label for="isAdmin" class="block text-sm text-[#DEB992]">Is Admin:</label>
+        <input
+          type="checkbox"
+          [(ngModel)]="isAdmin"
+          name="isAdmin"
+          class="h-4 w-4"
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        [disabled]="!firstName || !lastName || !email || !phone"
+        class="w-full bg-[#DEB992] text-[#051622] py-2 rounded-md hover:bg-[#C3A369] disabled:bg-[#A58A4D]"
+      >
+        Submit
+      </button>
+    </form>
+
+    <button
+      (click)="closeModal()"
+      class="mt-4 w-full bg-[#A58A4D] text-[#051622] py-2 rounded-md hover:bg-[#C3A369]"
+    >
+      Close
+    </button>
+  </div>
+</div>
