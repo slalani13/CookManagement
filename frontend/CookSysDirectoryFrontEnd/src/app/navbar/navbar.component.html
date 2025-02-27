@@ -13,21 +13,21 @@
         <a routerLink="/company" class="text-[#1BA098]">Company</a>
         <a routerLink="/team" class="text-[#1BA098]">Team</a>
         <a routerLink="/users" class="text-[#1BA098]">Users</a>
-        <a routerLink="/" (click)="handleLogout() "class="text-[#1BA098]">Logout</a>
+        <a routerLink="/" (click)="handleLogout($event) "class="text-[#1BA098]">Logout</a>
       </div>
       <div class="md:hidden">
-        <button id="menu-button" class="text-[#1BA098] focus:outline-none">
+        <button id="menu-button" class="text-[#1BA098] focus:outline-none" (click)="toggleMenu()">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
         </button>
       </div>
     </div>
-    <div id="menu" class="md:hidden flex flex-col mt-4 space-y-2">
+    <div id="menu" class="md:hidden flex flex-col mt-4 space-y-2" [class.hidden]="!showMenu">
       <a routerLink="/home" class="text-[#1BA098] border-b-2 border-[#DEB992]">Home</a>
       <a routerLink="/company" class="text-[#1BA098] border-b-2 border-[#DEB992]">Company</a>
       <a routerLink="/team" class="text-[#1BA098] border-b-2 border-[#DEB992]">Team</a>
       <a routerLink="/users" class="text-[#1BA098] border-b-2 border-[#DEB992]">Users</a>
-      <a routerLink="/logout" class="text-[#1BA098] border-b-2 border-[#DEB992]">Logout</a>
+      <a routerLink="/" (click)="handleLogout($event)" class="text-[#1BA098] border-b-2 border-[#DEB992]">Logout</a>
     </div>
 </nav>

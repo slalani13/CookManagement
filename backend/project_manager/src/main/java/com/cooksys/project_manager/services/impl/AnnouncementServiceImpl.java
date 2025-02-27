@@ -17,6 +17,7 @@ import com.cooksys.project_manager.services.AnnouncementService;
 
 import lombok.RequiredArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,6 +64,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         newAnnouncement.setCompany(company);
         newAnnouncement.setMessage(announcementRequestDto.getMessage());
         newAnnouncement.setTitle(announcementRequestDto.getTitle());
+        newAnnouncement.setDate(announcementRequestDto.getDate() != null ? announcementRequestDto.getDate() : new Timestamp(System.currentTimeMillis()));
         newAnnouncement.setDeleted(false);
 
         return announcementMapper.entityToResponseDto(announcementRepository.saveAndFlush(newAnnouncement));

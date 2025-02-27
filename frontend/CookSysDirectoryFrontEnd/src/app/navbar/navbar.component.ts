@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../user.service';
 import { User } from '../models/user.model';
 
@@ -11,8 +11,20 @@ import { User } from '../models/user.model';
 })
 export class NavbarComponent implements OnInit {
   user: User | null = null;
+  showMenu = false;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
+  @HostListener('window:resize', ['$event'])
+  onresize(event: Event) {
+    const width = (event.target as Window).innerWidth
+    if (width > 768) {
+      this.showMenu = true;
+    }
+  }
+
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
+  }
 
   ngOnInit(): void {
     const menuButton = document.getElementById('menu-button');
@@ -28,9 +40,13 @@ export class NavbarComponent implements OnInit {
 
   }
 
-  handleLogout() {
-   this.userService.logout();
-   console.log(this.userService.getUser());
+  handleLogout(event: Event) {
+    event.preventDefault();
+    console.log('navbar:', this.user);
+    if (this.user) {
+      this.userService.logout(this.user).subscribe(() => {
+        this.router.navigate(['/']);
+      });
+    }
   }
-
 }

@@ -61,6 +61,7 @@ export class HomeComponent implements OnInit {
       const companyId = this.company.id;
       this.companyService.createAnnouncement({ authorId, companyId, title: this.title, message: this.message }).subscribe({
         next: (announcement) => {
+          console.log(announcement);
           this.clearForm();
           this.closeModal();
         },
