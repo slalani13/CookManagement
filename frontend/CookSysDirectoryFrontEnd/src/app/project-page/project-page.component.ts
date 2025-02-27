@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { getProjectsFromTeam } from '../services/projectService';
 import { CommonModule } from '@angular/common';
+import { projectResponseData } from '../models/projectData';
 
 @Component({
   selector: 'app-project-page',
@@ -10,6 +11,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './project-page.component.css'
 })
 export class ProjectPageComponent implements OnInit{
+
+  projectData:projectResponseData|null = null;
 
   constructor(){
   }

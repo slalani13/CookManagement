@@ -25,4 +25,6 @@ public class Project {
 
     private Long team;
 
+    private String content;
+
 }
