@@ -33,6 +33,6 @@ export class TeamCardComponent {
   }
 
   onSubmit() {
-    this.router.navigate(['/projects'])
+    this.router.navigate(['/projects'], { queryParams: { team_id: this.id }} )
   }
 }

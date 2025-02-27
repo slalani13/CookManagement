@@ -9,6 +9,7 @@ import { getProjectsFromTeam } from '../services/projectService';
 @Component({
   selector: 'app-team',
   imports: [CommonModule, NavbarComponent, TeamCardComponent, CreateTeamComponent],
+  standalone:true,
   templateUrl: './team.component.html',
   styleUrl: './team.component.css'
 })
