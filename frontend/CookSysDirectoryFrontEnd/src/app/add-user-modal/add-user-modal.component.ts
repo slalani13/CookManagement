@@ -82,30 +82,6 @@ export class AddUserModalComponent {
             }
           );
   });
-
-  // this.userService.createUser(userRequest).subscribe(
-  //   (user) => {
-  //     console.log("User created successfully:", user);
-      
-  //     // Get companyId using company service
-  //     const companyId = this.companyService.getCompanyId(); 
-  //     // addUserToCompany takes a company id and user credentials which is username and password and add user to company
-  //     this.companyService.addUserToCompany(Number(companyId), credentials).subscribe(
-  //       (response) => {
-  //         console.log("User added to company:", response);
-  //         this.modalClose.emit(); // Close modal
-  //         this.router.navigate(['/users']);
-  //         // location.reload(); // Reload page
-  //       },
-  //       (error) => {
-  //         console.error("Error adding user to company:", error);
-  //       }
-  //     );
-  //   },
-  //   (error) => {
-  //     console.error("Error creating user:", error);
-  //   }
-  // );
   }
 
 }
