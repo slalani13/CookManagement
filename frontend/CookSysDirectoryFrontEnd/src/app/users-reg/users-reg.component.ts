@@ -5,11 +5,12 @@ import { CompanyService } from '../company.service';
 import { User } from '../models/user.model';
 import { Company } from '../models/company.model';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { AddUserModalComponent } from '../add-user-modal/add-user-modal.component';
 
 
 @Component({
   selector: 'app-users-reg',
-  imports: [UserRegistryCardComponent, CommonModule, NavbarComponent],
+  imports: [UserRegistryCardComponent, CommonModule, NavbarComponent, AddUserModalComponent],
   templateUrl: './users-reg.component.html',
   styleUrl: './users-reg.component.css'
 })
@@ -17,6 +18,7 @@ export class UsersRegComponent implements OnInit{
   users: User[] = [];
   selectedCompanyId: number = 0;
   company: Company | null = null;
+  showModal: boolean = false;
 
   constructor(private companyService: CompanyService) {}
 
@@ -30,29 +32,14 @@ export class UsersRegComponent implements OnInit{
       console.log("Users: " + this.users);
     });
 
-    // this.companyService.selectedCompanyId$.subscribe(companyId => {
-    //   this.selectedCompanyId = companyId;
-    //   if (companyId) {
-    //     this.fetchUsers(companyId);
-    //   } else {
-    //     this.users = [];
-    //   }
-    // });
   }
 
-  // fetchUsers(companyId: number): void {
-  //   this.companyService.getUsersByCompanyId().subscribe(users => {
-  //     this.users = users;
-  //     console.log('Users for selected company:', this.users);
-  //   });
-  // }
+  openModal() {
+    this.showModal=true;
+  }
 
-  // fetchUsersByCompany(company: Company): void {
-  //   // const data: User[] | null = this.company?.users;
-  //   console.log("Fetching users!");
-  //   if (Array.isArray(this.company) )
-  //   this.users = [...this.company.users];
-  //   console.log("Here are the company users: " + this.users);
-  // }
+  closeModal() {
+    this.showModal = false;
+  }
 
 }

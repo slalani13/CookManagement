@@ -1,18 +1,20 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { User } from '../models/user.model';
 import { CompanyService } from '../company.service';
 import { UserService } from '../user.service';
 import { FormsModule } from '@angular/forms'; 
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-user-modal',
-  imports: [],
+  imports: [FormsModule, CommonModule],
   templateUrl: './add-user-modal.component.html',
   styleUrl: './add-user-modal.component.css'
 })
 export class AddUserModalComponent {
-
-  @Output() userAdded = new EventEmitter<User>();
+  @Input() isModalVisible: boolean = false;  // To receive showModal from the parent
+  @Output() modalClose = new EventEmitter<void>();  // To emit close event to parent
+  
   
   // Class variables for form inputs
   firstName: string = '';
@@ -20,43 +22,27 @@ export class AddUserModalComponent {
   email: string = '';
   phone: string = '';
   isAdmin: boolean = false;
+  password: string = '';
+  confirmPassword: string = '';
 
   constructor(
     private companyService: CompanyService,
     private userService: UserService
   ) {}
 
-  // Submit the new user
-  // onSubmit(): void {
-
-  //   const newUser = {
-  //     profile: {
-  //       firstName: this.firstName,
-  //       lastName: this.lastName,
-  //       email: this.email,
-  //       phone: this.phone
-  //     },
-  //     active: true,
-  //     admin: this.isAdmin,
-  //     status: 'active'
-  //   };
-
-
-    // Call the service to add the user to the team and update the user's team
-    // this.companyService.addUserToTeam(newUser).subscribe((addedUser) => {
-    //   this.userService.updateUserTeam(addedUser).subscribe(() => {
-    //     this.userAdded.emit(addedUser); // Emit the new user data to parent
-    //   });
-    // });
+  close() {
+    this.modalClose.emit();  // Emit the close event
   }
 
-  // Close the modal (optional if using Angular modal library)
-  // closeModal(): void {
-  //   // Logic to close modal
-  // }
+  submitForm() {
+    console.log(this.firstName);
+    console.log(this.lastName);
+    console.log(this.email);
+    console.log(this.phone);
+    console.log(this.isAdmin);
+    console.log(this.password);
+    console.log(this.confirmPassword);
+    this.modalClose.emit();
+  }
 
-  // open() {
-  //   console.log('module is open!');
-  // }
-
-// }
+}
