@@ -76,8 +76,6 @@ export class AddUserModalComponent {
             (response) => {
               console.log("User added to company:", response);
               this.modalClose.emit(); // Close modal
-              // this.router.navigate(['/users']);
-              // // location.reload(); // Reload page
             },
             (error) => {
               console.error("Error adding user to company:", error);
