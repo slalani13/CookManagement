@@ -14,6 +14,6 @@ public class TeamRequestDto {
 
     private String description;
 
-    private CompanyResponseDto company;
+    private Long company;
     
 }

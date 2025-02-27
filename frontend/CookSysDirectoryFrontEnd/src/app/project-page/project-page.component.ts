@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { getProjectsFromTeam } from '../services/projectService';
 
 @Component({
   selector: 'app-project-page',
@@ -6,6 +7,13 @@ import { Component } from '@angular/core';
   templateUrl: './project-page.component.html',
   styleUrl: './project-page.component.css'
 })
-export class ProjectPageComponent {
+export class ProjectPageComponent implements OnInit{
+
+  constructor(){
+  }
+
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
 }

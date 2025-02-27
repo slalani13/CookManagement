@@ -23,8 +23,6 @@ public class Project {
 
     private boolean isActive;
 
-    @ManyToOne
-    @JoinColumn(name = "team_id")
-    private Team team;
+    private Long team;
 
 }

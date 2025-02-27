@@ -86,7 +86,7 @@ public class ProjectServiceImpl implements ProjectService {
         newProject.setActive(false);
         newProject.setName(projectRequestDto.getName());
         newProject.setDescription(projectRequestDto.getDescription());
-        newProject.setTeam(teamMapper.responseDtoToEntity(projectRequestDto.getTeam()));
+        newProject.setTeam(projectRequestDto.getTeam());
         currTeam.getProjects().add(newProject);
         teamRepository.save(currTeam);
         return projectMapper.entityToResponseDto(projectRepository.save(newProject));
@@ -126,7 +126,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public String fullyDeleteProject(Long project_id, CredentialsDto credentialsDto) {
         Project currProject = validateProjectWithId(project_id, credentialsDto);
-        Team currTeam = getTeamWithId(currProject.getTeam().getId());
+        Team currTeam = getTeamWithId(currProject.getTeam());
         currTeam.getProjects().remove(currProject);
         teamRepository.save(currTeam);
         projectRepository.delete(currProject);
