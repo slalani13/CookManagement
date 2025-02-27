@@ -1,11 +1,14 @@
 <app-navbar></app-navbar>
+<br>
+<br>
+<br>
 <div class="teams-page-container flex flex-col justify-center items-center w-full py-5 mt-10">
-    <h1 class="text-3xl font-bold">Teams</h1>
+    <h1 class="text-6xl font-bold">Teams</h1>
     <div class="teams-container grid grid-cols-3 gap-5 justify-between w-4/5">
-        <app-team-card *ngFor="let team of teams" [team]="team">
+        <app-team-card *ngFor="let team of teams; let i = index" [team]="team" [project]="projects[i]">
 
         </app-team-card>
-        <div class="new-team-container cursor-pointer felx flex-col items-center justify-center 
+        <div class="new-team-container cursor-pointer felx flex-col items-center justify-center  
                         flex-1 m-5 w-80 h-64 box-border rounded-2xl border-2 border-beige bg-transparent text-beige font-normal 
                         leading-none shadow-md hover:bg-opacity-15 hover:bg-indigo-900" (click)="toggleOverlay()">
             <div>New Team</div>

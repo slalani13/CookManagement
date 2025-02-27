@@ -9,14 +9,14 @@
         </div>
     </div>
     <div class="flex border-t border-[var(--beige)] w-full items-center justify-center py-2.5 text-[rgba(255,_255,_255,_0.6)]">
-        <div class="employee-title">Members</div>
+        <div class="align-self text-center">Members</div>
     </div>
     <div class="grid grid-cols-2 gap-2.5 justify-center w-[80%] h-[90%]">
-        <div *ngFor="let employee of team.employees">
+        <div *ngFor="let user of team.users">
             <div class="flex items-center justify-center w-[110px] h-[35px] min-h-[35px] rounded-[10px] bg-[var(--blue-text)] my-2.5 shadow-[0px_0px_5px_rgba(0,_0,_0,_0.292)]">
                 <div class="w-full">
                     <h3 class="text-center text-white text-[16px] font-normal m-0">
-                        {{ employee}}
+                    {{ user.profile.firstName + " " + user.profile.lastName }}
                     </h3>
                 </div>
             </div>

@@ -34,6 +34,9 @@ export class SelectCompanyComponent implements OnInit{
     const selectedCompanyId = (event.target as HTMLSelectElement).value;
     console.log('Selected company ID:', selectedCompanyId);
 
+    // Set the selected company ID in CompanyService
+    this.companyService.setSelectedCompanyId(Number(selectedCompanyId));
+
     // Fetch company details
     this.companyService.getCompanyById(Number(selectedCompanyId)).subscribe(company => {
       this.selectedCompany = company;
