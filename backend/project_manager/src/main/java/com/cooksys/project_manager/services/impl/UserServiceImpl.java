@@ -1,6 +1,7 @@
 package com.cooksys.project_manager.services.impl;
 
 import com.cooksys.project_manager.dtos.CredentialsDto;
+import com.cooksys.project_manager.dtos.FullUserDto;
 import com.cooksys.project_manager.dtos.UserRequestDto;
 import com.cooksys.project_manager.dtos.UserResponseDto;
 import com.cooksys.project_manager.entities.Credentials;
@@ -18,6 +19,7 @@ import com.cooksys.project_manager.services.UserService;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -31,7 +33,7 @@ public class UserServiceImpl implements UserService {
     private final ProfileMapper profileMapper;
 
     @Override
-    public UserResponseDto createUser(UserRequestDto userRequestDto) {
+    public FullUserDto createUser(UserRequestDto userRequestDto) {
         User user = userMapper.requestDtoToEntity(userRequestDto);
         // check that profile, credentials, and admin aren't null
         // Validate required fields
@@ -45,14 +47,16 @@ public class UserServiceImpl implements UserService {
         user.setActive(true);
         user.setStatus("inactive");
         user.setAdmin(user.isAdmin());
+        user.setCompanies(new ArrayList<>());
+        user.setTeams(new ArrayList<>());
         userRepository.save(user);
-        UserResponseDto response = userMapper.entityToResponseDto(user);
+        FullUserDto response = userMapper.entityToFullUserDto(user);
         System.out.println("Returning response: " + response);
         return response;
     }
 
     @Override
-    public UserResponseDto activateUser(CredentialsDto credentialsDto) {
+    public FullUserDto activateUser(CredentialsDto credentialsDto) {
         if (credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
             throw new IllegalArgumentException("Username and password cannot be null");
         }
@@ -65,11 +69,11 @@ public class UserServiceImpl implements UserService {
         User user = optionalUser.get();
         user.setStatus("active");
         userRepository.save(user);
-        return userMapper.entityToResponseDto(user);
+        return userMapper.entityToFullUserDto(user);
     }
 
     @Override
-    public UserResponseDto deleteUser( Long id) {
+    public FullUserDto deleteUser( Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty() || !optionalUser.get().isActive()) {
             throw new IllegalArgumentException("id not found or already deleted");
@@ -77,16 +81,16 @@ public class UserServiceImpl implements UserService {
         User user = optionalUser.get();
         user.setActive(false);
         userRepository.save(user);
-        return userMapper.entityToResponseDto(user);
+        return userMapper.entityToFullUserDto(user);
     }
 
     @Override
-    public UserResponseDto getUserById(Long id) {
+    public FullUserDto getUserById(Long id) {
         Optional<User>  optionalUser = userRepository.findByIdAndIsActiveTrue(id);
         if (optionalUser.isEmpty()) {
             throw new NotFoundException("user not found");
         }
-        return userMapper.entityToResponseDto(optionalUser.get());
+        return userMapper.entityToFullUserDto(optionalUser.get());
     }
 
 //    private User getUser(Long id) {
@@ -99,7 +103,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserResponseDto updateUserProfile(Long id, Profile profile) {
+    public FullUserDto updateUserProfile(Long id, Profile profile) {
         Optional<User> optionalUser = userRepository.findByIdAndIsActiveTrue(id);
         if (optionalUser.isEmpty()) {
             throw new NotFoundException("user not found");
@@ -120,7 +124,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
 
-        return userMapper.entityToResponseDto(user);
+        return userMapper.entityToFullUserDto(user);
     }
 
 

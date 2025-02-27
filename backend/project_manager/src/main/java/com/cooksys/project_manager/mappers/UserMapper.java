@@ -23,4 +23,6 @@ public interface UserMapper {
 
     List<User> dtosToEntities(List<UserRequestDto> users);
 
+    FullUserDto entityToFullUserDto(User user);
+
 }
