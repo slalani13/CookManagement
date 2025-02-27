@@ -19,7 +19,7 @@ export class ProjectsComponent implements OnInit{
 
   ngOnInit(): void {
     //this.fetchProjectsFromTeam();
-    this.addProjectToTeam();
+    //this.addProjectToTeam();
   }
 
   fetchProjectsFromTeam(){
