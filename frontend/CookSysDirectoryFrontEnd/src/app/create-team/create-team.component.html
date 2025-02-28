@@ -1,1 +1,46 @@
-<p>create-team works!</p>
+<br>
+<br>
+<br>
+<div class="add-user-overlay" *ngIf="modalOpen">
+    <div class="add-user-container">
+        <div class="exit-button" (click)="exit()">
+            <img class="exit-icon" src="exit.png" alt="exit"/>
+        </div>
+        <div>
+            <div class="label-input">
+                <label for="name">Team Name</label>
+                <input type="text" id="name" name="name" [(ngModel)]="teamName"/>
+            </div>
+            <div class="label-input">
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" [(ngModel)]="description"/>
+                <h1>Select Employees</h1>
+                <div>
+                    <select name="user" id="users" [(ngModel)]="selectedUser">
+                        <option *ngFor="let user of users" [ngValue]="user">
+                            {{ user.profile.firstName }}
+                            {{ user.profile.lastName  }}
+                        </option>
+                    </select>
+                    <div class="add-button-container">
+                        <button class="add-button" (click)="addUser()">Add</button>
+                    </div>
+                </div>
+                <div class="space"*ngIf="addedUsers.length > 0">
+                    <div *ngFor="let user of addedUsers" class="added-user-conatainter">
+                        <div class="added-user">
+                            {{ user.profile.firstName }}
+                            {{ user.profile.lastName }}
+                        </div>
+                        <img class="exit-icon-user" src="exit.png" alt="exit" (click)="removeUser(user)"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class="submit-button" value="Login" (click)="newTeam()" [disabled]="teamName === '' || description === ''">
+                Submit
+            </button>
+        </div>
+    </div>
+</div>

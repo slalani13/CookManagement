@@ -1,7 +1,9 @@
 package com.cooksys.project_manager.services.impl;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -56,12 +58,17 @@ public class CompanyServiceImpl implements CompanyService{
         }
     }
 
+
     // Retrieves a list of all active users that work for the given company. 
     // If the company id provided does not match an active company in the database,
     // an error should be sent in lieu of a response.
     @Override
     public List<FullUserDto> getUsers(Long id) {
-        return userMapper.entitiesToDto(userRepository.findAllByIdAndIsActiveTrue(id));
+        Company company = validateCompanyId(id);
+        Set<User> users = new HashSet<>();
+        company.getUsers().forEach(users::add);
+        users.removeIf(user -> !user.isActive());
+        return userMapper.entitiesToDto(users);
     }
 
     @Override
