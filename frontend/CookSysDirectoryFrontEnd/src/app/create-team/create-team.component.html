@@ -30,7 +30,7 @@
                     <div *ngFor="let user of addedUsers" class="added-user-conatainter">
                         <div class="added-user">
                             {{ user.profile.firstName }}
-                            {{ user.profile.lastName }}
+                            {{ user.profile.lastName.substring(0,1) }}.
                         </div>
                         <img class="exit-icon-user" src="exit.png" alt="exit" (click)="removeUser(user)"/>
                     </div>

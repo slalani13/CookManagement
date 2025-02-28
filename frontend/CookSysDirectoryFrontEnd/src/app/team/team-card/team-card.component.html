@@ -16,7 +16,7 @@
             <div class="flex items-center justify-center w-[110px] h-[35px] min-h-[35px] rounded-[10px] bg-[var(--blue-text)] my-2.5 shadow-[0px_0px_5px_rgba(0,_0,_0,_0.292)]">
                 <div class="w-full">
                     <h3 class="text-center text-white text-[16px] font-normal m-0">
-                    {{ user.profile.firstName + " " + user.profile.lastName }}
+                    {{ user.profile.firstName + " " + user.profile.lastName.substring(0,1) }}.
                     </h3>
                 </div>
             </div>
