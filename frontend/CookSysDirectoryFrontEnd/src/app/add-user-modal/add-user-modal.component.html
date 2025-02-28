@@ -52,6 +52,11 @@
       </div>
     </div>
 
+        <!-- Password mismatch error message -->
+    <p *ngIf="password && confirmPassword && password !== confirmPassword" class="text-red-500 text-sm mb-4">
+      Passwords do not match.
+    </p>
+
     <!-- Is Admin dropdown -->
     <label for="isAdmin" class="block text-sm font-medium text-gray-300">Is Admin</label>
     <select id="isAdmin" [(ngModel)]="isAdmin" class="w-full bg-transparent border-b border-gray-400 text-white outline-none py-2 focus:border-teal-400 mb-4">

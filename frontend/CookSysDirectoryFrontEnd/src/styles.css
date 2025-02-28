@@ -3,7 +3,12 @@
 
 body {
   background-color: #051622;
-  color: #1BA098BF;
+  background-image: url("/red_blue_aura.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
 }
 
 textarea:focus, input:focus {

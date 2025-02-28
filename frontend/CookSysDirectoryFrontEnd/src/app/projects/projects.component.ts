@@ -8,6 +8,8 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { CreateProjectComponent } from "../create-project/create-project.component";
 import { EditProjectComponent } from '../edit-project/edit-project.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../user.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-projects',
@@ -23,11 +25,12 @@ export class ProjectsComponent implements OnInit{
   editing_project:boolean = false;
   creating_project:boolean = false;
   projects:projectResponseData[] = [];
+  user:User|null = null;
 
   currentPage = 1;
   itemsPerPage = 3;
   
-  constructor(private route: ActivatedRoute){
+  constructor(private route: ActivatedRoute, private userService:UserService){
   }
 
   ngOnInit(): void {
@@ -36,6 +39,9 @@ export class ProjectsComponent implements OnInit{
       const team_id = Number(params['team_id']);
       this.team_id = team_id;
       this.fetchProjectsFromTeam();
+    });
+    this.userService.getUser().subscribe(user => {
+      this.user = user;
     });
   }
 

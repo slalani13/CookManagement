@@ -10,7 +10,7 @@
 
 <div class="flex items-center justify-center min-h-screen text-center p-4">
   <div>
-    <h1 class="text-4xl md:text-5xl lg:text-[99px] font-bold mb-4 text-[#1BA098]">Select Company</h1>
+    <h1 class="text-4xl md:text-5xl lg:text-[99px] font-bold mb-4">Select Company</h1>
     <select (change)="onCompanySelect($event)" class="mt-2 p-2 border border-gray-300 rounded bg-white text-[#5533FF] w-full max-w-xs md:max-w-sm lg:max-w-md">
       <option value="" disabled selected>Pick an option</option>
       <option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</option>

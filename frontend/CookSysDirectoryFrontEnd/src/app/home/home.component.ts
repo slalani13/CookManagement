@@ -83,6 +83,10 @@ export class HomeComponent implements OnInit {
     return this.announcements.slice(startIndex, endIndex);
   }
 
+  get totalPages() {
+    return Math.ceil(this.announcements.length / this.itemsPerPage);
+  }
+
   nextPage() {
     if (this.currentPage * this.itemsPerPage < this.announcements.length) {
       this.currentPage++;

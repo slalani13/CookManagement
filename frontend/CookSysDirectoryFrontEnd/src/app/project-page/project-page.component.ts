@@ -32,6 +32,9 @@ export class ProjectPageComponent implements OnInit{
     this.route.queryParams.subscribe(params => {
       this.project_id = Number(params['project_id']);
     });
+    this.userService.getUser().subscribe(user => {
+      this.user = user;
+    });
     this.fetchProjectData();
   }
 
@@ -49,9 +52,6 @@ export class ProjectPageComponent implements OnInit{
 
   doneEditing(): void{
     if (this.project)
-    this.userService.getUser().subscribe(user => {
-      this.user = user;
-    });
     updateProjectContent(this.project_id, {content:this.content}).then((data)=>{
       console.log(JSON.stringify(data)+" project content edited successfully")
     }).then(() =>{
