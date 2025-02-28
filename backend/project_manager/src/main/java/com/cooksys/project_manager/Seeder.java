@@ -66,6 +66,22 @@ public class Seeder implements CommandLineRunner {
         cred8.setUsername("red_stapler");
         cred8.setPassword("password");
 
+        Credentials cred9 = new Credentials();
+        cred9.setUsername("paolo");
+        cred9.setPassword("password");
+
+        Credentials cred10 = new Credentials();
+        cred9.setUsername("rishi");
+        cred9.setPassword("password");
+
+        Credentials cred11 = new Credentials();
+        cred9.setUsername("shariq");
+        cred9.setPassword("password");
+
+        Credentials cred12= new Credentials();
+        cred9.setUsername("gabriel");
+        cred9.setPassword("password");
+
         // Create Profiles
         Profile profile1 = new Profile();
         profile1.setFirstName("John");
@@ -114,6 +130,30 @@ public class Seeder implements CommandLineRunner {
         profile8.setLastName("Stapler");
         profile8.setEmail("red@initech.net");
         profile8.setPhone("5555555555");
+
+        Profile profile9 = new Profile();
+        profile9.setFirstName("Paolo");  // Should be profile9
+        profile9.setLastName("ALberca"); // Should be profile9
+        profile9.setEmail("paolo@cooksys.com"); // Should be profile9
+        profile9.setPhone("5555555555"); // Should be profile9
+
+        Profile profile10 = new Profile();
+        profile10.setFirstName("Rishi");
+        profile10.setLastName("Jammalamadaka");
+        profile10.setEmail("Rishi@cooksys.com");
+        profile10.setPhone("5555555555");
+
+        Profile profile11 = new Profile();
+        profile11.setFirstName("Shariq");
+        profile11.setLastName("Lalni");
+        profile11.setEmail("shariq@cooksys.com");
+        profile11.setPhone("5555555555");
+
+        Profile profile12 = new Profile();
+        profile12.setFirstName("Gabriel");
+        profile12.setLastName("Quezada");
+        profile12.setEmail("gabriel@cooksys.com");
+        profile12.setPhone("5555555555");
 
         // Create Users
         User user1 = new User();
@@ -172,8 +212,36 @@ public class Seeder implements CommandLineRunner {
         user8.setAdmin(false);
         user8.setStatus("inactive");
 
+        User user9 = new User();
+        user9.setCredentials(cred9);
+        user9.setProfile(profile9);
+        user9.setActive(true);
+        user9.setAdmin(true);
+        user9.setStatus("active");
 
-        userRepository.saveAll(List.of(user1, user2, user3, user4, user5, user6, user7, user8));
+        User user10 = new User();
+        user10.setCredentials(cred10);  // Fixed
+        user10.setProfile(profile10);   // Fixed
+        user10.setActive(true);         // Fixed
+        user10.setAdmin(true);          // Fixed
+        user10.setStatus("active");
+
+        User user11 = new User();
+        user11.setCredentials(cred11);  // Fixed
+        user11.setProfile(profile11);   // Fixed
+        user11.setActive(true);         // Fixed
+        user11.setAdmin(true);          // Fixed
+        user11.setStatus("active");     // Fixed
+
+        User user12 = new User();
+        user12.setCredentials(cred12);  // Fixed
+        user12.setProfile(profile12);   // Fixed
+        user12.setActive(true);         // Fixed
+        user12.setAdmin(true);          // Fixed
+        user12.setStatus("active");     // Fixed
+
+
+        userRepository.saveAll(List.of(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10, user11, user12));
 
         // Create Company
         Company company = new Company();
@@ -206,7 +274,11 @@ public class Seeder implements CommandLineRunner {
         user6.setCompanies(new ArrayList<>(List.of(company2)));
         user7.setCompanies(new ArrayList<>(List.of(company4, company2, company, company3)));
         user8.setCompanies(new ArrayList<>(List.of(company4)));
-        userRepository.saveAll(List.of(user1, user2, user3, user4, user5, user6, user7, user8));
+        user9.setCompanies(new ArrayList<>(List.of(company, company2, company3, company4)));
+        user10.setCompanies(new ArrayList<>(List.of(company, company2, company3, company4)));
+        user11.setCompanies(new ArrayList<>(List.of(company, company2, company3, company4)));
+        user12.setCompanies(new ArrayList<>(List.of(company, company2, company3, company4)));
+        userRepository.saveAll(List.of(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10, user11, user12));
 
         // Create Teams
         Team team1 = new Team();
@@ -221,7 +293,13 @@ public class Seeder implements CommandLineRunner {
         team2.setCompany(company.getId());
         team2.setUsers(new ArrayList<>(List.of(user3, user4)));
 
-        teamRepository.saveAll(List.of(team1, team2));
+        Team team3 = new Team();
+        team3.setName("Hooli Team");
+        team3.setDescription("Handles all development");
+        team3.setCompany(company.getId());
+        team3.setUsers(new ArrayList<>(List.of(user9, user10, user11, user12)));
+
+        teamRepository.saveAll(List.of(team1, team2, team3));
 
         // Create Projects
         Project project1 = new Project();
