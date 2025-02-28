@@ -3,7 +3,7 @@ import { CanActivate, Router } from '@angular/router';
 import { UserService } from './user.service';
 import { ModalService } from './modal.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +14,17 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): Observable<boolean> {
     return this.userService.getUser().pipe(
+      tap(user => console.log('AuthGuard: User data:', user)),
       map(user => {
         if (user) {
           return true;
         } else {
-            this.modalService.show();
+          // Show modal directly
+          this.modalService.show();
+          
+          // Navigate to login page
           this.router.navigate(['/']);
+          
           return false;
         }
       })

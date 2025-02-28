@@ -1,3 +1,13 @@
 
 <router-outlet />
-<app-modal-popup></app-modal-popup>
+<div *ngIf="showAuthModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+    <div class="bg-[#051622] p-8 rounded-lg shadow-lg max-w-md">
+      <h2 class="text-xl text-[#DEB992] font-bold mb-4">Authentication Required</h2>
+      <p class="text-white mb-6">You need to log in to access this page.</p>
+      <div class="flex justify-end">
+        <button (click)="closeAuthModal()" class="px-4 py-2 bg-[#1BA098] text-white rounded">
+          OK
+        </button>
+      </div>
+    </div>
+</div>

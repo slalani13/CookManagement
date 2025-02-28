@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { User } from '../models/user.model';
 import { catchError, of, tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ModalService } from '../modal.service';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +13,22 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   username: string = ''
   password: string = ''
   errorMessage: string = '';
 
-  constructor(private router: Router, private userService: UserService) {} 
+  constructor(private router: Router, private userService: UserService, private modalService: ModalService) {}
+  
+  ngOnInit() {
+    // Check if we were redirected from auth guard with showAuthModal flag
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras?.state?.['showAuthModal']) {
+      setTimeout(() => {
+        this.modalService.show();
+      }, 500); // Small delay to ensure component is ready
+    }
+  }
 
   navigateToSelectCompany() {
     this.userService.login(this.username, this.password).pipe(
