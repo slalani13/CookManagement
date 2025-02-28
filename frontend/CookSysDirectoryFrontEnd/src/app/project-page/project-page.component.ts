@@ -6,6 +6,8 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { EditProjectComponent } from '../edit-project/edit-project.component';
+import { UserService } from '../user.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-project-page',
@@ -21,8 +23,9 @@ export class ProjectPageComponent implements OnInit{
   edit:boolean = false;
   editing_project:boolean = false;
   content:string = "";
+  user:User|null = null;
 
-  constructor(private route: ActivatedRoute){
+  constructor(private route: ActivatedRoute, private userService: UserService){
   }
 
   ngOnInit(): void {
@@ -46,7 +49,10 @@ export class ProjectPageComponent implements OnInit{
 
   doneEditing(): void{
     if (this.project)
-    updateProjectContent(this.project_id, {content:this.content, credentials: {username:"jane_smith", password:"password" }}).then((data)=>{
+    this.userService.getUser().subscribe(user => {
+      this.user = user;
+    });
+    updateProjectContent(this.project_id, {content:this.content}).then((data)=>{
       console.log(JSON.stringify(data)+" project content edited successfully")
     }).then(() =>{
       this.fetchProjectData();

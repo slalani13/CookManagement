@@ -35,8 +35,7 @@ export class CreateProjectComponent implements OnInit {
   }
 
   addProjectToTeam(){
-    createProject(this.team_id, {name: this.new_name, description:this.new_description, team:this.team_id, active:true,
-       credentials: {username:"jane_smith", password:"password" }}).then((data)=>{
+    createProject(this.team_id, {name: this.new_name, description:this.new_description, team:this.team_id, active:true}).then((data)=>{
       console.log(JSON.stringify(data)+" project added successfully")
     }).then(()=>{
       this.active = false;

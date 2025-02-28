@@ -9,7 +9,7 @@ import com.cooksys.project_manager.dtos.TeamResponseDto;
 import com.cooksys.project_manager.entities.Team;
 
 
-@Mapper(componentModel = "spring", uses = { CredentialsMapper.class })
+@Mapper(componentModel = "spring")
 
 public interface TeamMapper {
 
