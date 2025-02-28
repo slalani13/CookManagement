@@ -59,11 +59,17 @@
       </div>
       <div class="mb-4 w-full">
         <label for="title" class="block text-[#DEB992]">Title</label>
-        <input type="text" id="title" name="title" [(ngModel)]="title" class="mt-1 block w-full px-3 py-2 bg-transparent border-b-2 border-[#DEB992] focus:outline-none focus:border-indigo-500 sm:text-sm">
+        <input type="text" id="title" name="title" [(ngModel)]="title" 
+               class="mt-1 block w-full px-3 py-2 bg-transparent border-b-2 border-[#DEB992] focus:outline-none focus:border-indigo-500 sm:text-sm"
+               [ngClass]="{'border-red-500': errorMessage === 'Title cannot be empty'}"
+               required>
       </div>
       <div class="mb-4 w-full">
         <label for="message" class="block text-[#DEB992]">Message</label>
-        <textarea id="message" name="message" [(ngModel)]="message" class="mt-1 block w-full px-3 py-2 bg-transparent border-b-2 border-[#DEB992] focus:outline-none focus:border-indigo-500 sm:text-sm"></textarea>
+        <textarea id="message" name="message" [(ngModel)]="message" 
+                  class="mt-1 block w-full px-3 py-2 bg-transparent border-b-2 border-[#DEB992] focus:outline-none focus:border-indigo-500 sm:text-sm"
+                  [ngClass]="{'border-red-500': errorMessage === 'Message cannot be empty'}"
+                  required></textarea>
       </div>
       <button type="submit" class="py-2 px-4 bg-[#1BA098] text-white rounded-[25px]">Submit</button>
     </form>

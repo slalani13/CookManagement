@@ -56,6 +56,16 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit() {
+    if (!this.title.trim()) {
+      this.errorMessage = 'Title cannot be empty';
+      return;
+    }
+    
+    if (!this.message.trim()) {
+      this.errorMessage = 'Message cannot be empty';
+      return;
+    }
+    
     if (this.user && this.user.id && this.user.companies && this.user.companies.length > 0) {
       const authorId = this.user.id;
       const companyId = this.company.id;
