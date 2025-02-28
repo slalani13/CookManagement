@@ -2,11 +2,9 @@ package com.cooksys.project_manager.services;
 
 import java.util.List;
 
-import com.cooksys.project_manager.dtos.AnnouncementResponseDto;
-import com.cooksys.project_manager.dtos.CompanyRequestDto;
-import com.cooksys.project_manager.dtos.CompanyResponseDto;
-import com.cooksys.project_manager.dtos.FullUserDto;
-import com.cooksys.project_manager.dtos.UserResponseDto;
+import com.cooksys.project_manager.dtos.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 public interface CompanyService {
 
@@ -21,5 +19,7 @@ public interface CompanyService {
     CompanyResponseDto updateCompany(Long id, CompanyRequestDto companyRequestDto);
 
     CompanyResponseDto deleteCompany(Long id);
+
+    CompanyResponseDto addUserToCompany(Long companyId, CredentialsDto credentialsDto);
 
 }
