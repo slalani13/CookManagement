@@ -13,7 +13,5 @@ public class TeamRequestDto {
     private String description;
 
     private Long company;
-
-    private CredentialsDto credentials;
     
 }

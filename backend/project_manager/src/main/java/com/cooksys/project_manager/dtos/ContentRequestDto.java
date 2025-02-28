@@ -8,6 +8,5 @@ import lombok.NoArgsConstructor;
 public class ContentRequestDto {
     
     private String content;
-
-    private CredentialsDto credentials;
+    
 }

@@ -5,7 +5,6 @@ export interface teamRequestData{
     name:string,
     description:string,
     company:number,
-    credentials:credentialsData,
 }
 
 export interface teamResponseData{

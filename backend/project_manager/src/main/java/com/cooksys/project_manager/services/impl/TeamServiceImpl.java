@@ -42,8 +42,8 @@ public class TeamServiceImpl implements TeamService{
     }
 
     // must find an undeleted team with valid credentials and authority, else throws an error
-    private Team validateTeamWithId(Long team_id, CredentialsDto credentialsDto){
-        hasPermission(credentialsDto);
+    private Team validateTeamWithId(Long team_id){
+        //hasPermission(credentialsDto);
         Optional<Team> optionalTeam = teamRepository.findByIdAndIsDeletedFalse(team_id);
         if (!optionalTeam.isPresent()){
             throw new BadRequestException(String.format("Team with id %d is does not exist or is inactive", team_id));
@@ -97,7 +97,7 @@ public class TeamServiceImpl implements TeamService{
 
     @Override
     public TeamResponseDto createTeam(TeamRequestDto teamRequestDto) {
-        hasPermission(teamRequestDto.getCredentials());
+        //hasPermission(teamRequestDto.getCredentials());
         Team newTeam = teamRepository.save(teamMapper.requestDtoToEntity(teamRequestDto));
         newTeam.setName(teamRequestDto.getName());
         newTeam.setDescription(teamRequestDto.getDescription());
@@ -107,7 +107,7 @@ public class TeamServiceImpl implements TeamService{
 
     @Override
     public TeamResponseDto updateTeam(Long team_id, TeamRequestDto teamRequestDto) {
-        Team currTeam = validateTeamWithId(team_id, teamRequestDto.getCredentials());
+        Team currTeam = validateTeamWithId(team_id);
 
         // checking individual fields if they are null, do not replace a non-null field with a null field'
         if (teamRequestDto.getName() != null){
@@ -121,8 +121,8 @@ public class TeamServiceImpl implements TeamService{
     }
 
     @Override
-    public TeamResponseDto addToTeam(Long team_id, Long user_id, CredentialsDto credentialsDto) {
-        Team currTeam = validateTeamWithId(team_id, credentialsDto);
+    public TeamResponseDto addToTeam(Long team_id, Long user_id) {
+        Team currTeam = validateTeamWithId(team_id);
         User currUser = getUserWithId(user_id);
         currTeam.getUsers().add(currUser);
 
@@ -130,8 +130,8 @@ public class TeamServiceImpl implements TeamService{
     }
 
     @Override
-    public TeamResponseDto removeFromTeam(Long team_id, Long user_id, CredentialsDto credentialsDto) {
-        Team currTeam = validateTeamWithId(team_id, credentialsDto);
+    public TeamResponseDto removeFromTeam(Long team_id, Long user_id) {
+        Team currTeam = validateTeamWithId(team_id);
         User currUser = getUserWithId(user_id);
         currTeam.getUsers().remove(currUser);
 
@@ -139,8 +139,8 @@ public class TeamServiceImpl implements TeamService{
     }
 
     @Override
-    public String deleteTeam(Long team_id, CredentialsDto credentialsDto) {
-        Team currTeam = validateTeamWithId(team_id, credentialsDto);
+    public String deleteTeam(Long team_id) {
+        Team currTeam = validateTeamWithId(team_id);
         for (Project p : currTeam.getProjects()){
             p.setActive(false);
             projectRepository.save(p);
@@ -151,8 +151,8 @@ public class TeamServiceImpl implements TeamService{
     }
 
     @Override
-    public TeamResponseDto restoreTeam(Long team_id, CredentialsDto credentialsDto) {
-        Team currTeam = validateTeamWithId(team_id, credentialsDto);
+    public TeamResponseDto restoreTeam(Long team_id) {
+        Team currTeam = validateTeamWithId(team_id);
         // don't want to automatically restore projects
         currTeam.setDeleted(false);
         return teamMapper.entityToResponseDto(teamRepository.save(currTeam));
