@@ -6,11 +6,11 @@ import { User } from '../models/user.model';
 import { Company } from '../models/company.model';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { AddUserModalComponent } from '../add-user-modal/add-user-modal.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-users-reg',
-  imports: [UserRegistryCardComponent, CommonModule, NavbarComponent, AddUserModalComponent],
+  imports: [UserRegistryCardComponent, CommonModule, NavbarComponent, AddUserModalComponent, NgxPaginationModule],
   templateUrl: './users-reg.component.html',
   styleUrl: './users-reg.component.css'
 })
@@ -19,6 +19,7 @@ export class UsersRegComponent implements OnInit{
   selectedCompanyId: number = 0;
   company: Company | null = null;
   showModal: boolean = false;
+  page: number = 1; 
 
   constructor(private companyService: CompanyService) {}
 
