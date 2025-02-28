@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   announcements: Announcement[] = [];
   company = {} as Company;
   currentPage = 1;
-  itemsPerPage = 2;
+  itemsPerPage = 4;
   user: User | null = null;
   title: string = '';
   message: string = '';
