@@ -12,7 +12,7 @@
             Details
         </button>
 
-        <button (click)="setEditing()" class="px-4 py-2 bg-yellow-200 text-black rounded-lg hover:bg-yellow-400">
+        <button *ngIf="user?.admin" (click)="setEditing()" class="px-4 py-2 bg-yellow-200 text-black rounded-lg hover:bg-yellow-400">
             Edit
         </button>
     </div>

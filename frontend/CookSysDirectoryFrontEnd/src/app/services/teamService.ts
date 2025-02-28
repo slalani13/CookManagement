@@ -81,12 +81,10 @@ export async function updateTeam(team_id:number, teamRequest:teamRequestData){
     })
 }
 
-export async function addToTeam(team_id:number, user_id:number, credentialsRequest: credentialsData){
+export async function addToTeam(team_id:number, user_id:number){
     return fetchData({
     endpoint: `teams/${team_id}/add/${user_id}`,
     method: "PATCH",
-    body: JSON.stringify(credentialsRequest),
-    headers: {"Content-Type": "application/json"},
     }).then((response) => {
     if (response) {
         return response
@@ -102,12 +100,10 @@ export async function addToTeam(team_id:number, user_id:number, credentialsReque
     })
 }
 
-export async function removeFromTeam(team_id:number, user_id:number, credentialsRequest: credentialsData){
+export async function removeFromTeam(team_id:number, user_id:number){
     return fetchData({
     endpoint: `teams/${team_id}/remove/${user_id}`,
     method: "PATCH",
-    body: JSON.stringify(credentialsRequest),
-    headers: {"Content-Type": "application/json"},
     }).then((response) => {
     if (response) {
         return response
@@ -123,12 +119,10 @@ export async function removeFromTeam(team_id:number, user_id:number, credentials
     })
 }
 
-export async function deleteTeam(team_id:number, credentialsRequest: credentialsData){
+export async function deleteTeam(team_id:number){
     return fetchData({
     endpoint: `teams/${team_id}`,
     method: "DELETE",
-    body: JSON.stringify(credentialsRequest),
-    headers: {"Content-Type": "application/json"},
     }).then((response) => {
     if (response) {
         return response

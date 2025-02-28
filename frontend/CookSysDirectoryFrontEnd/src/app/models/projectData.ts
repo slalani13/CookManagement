@@ -5,7 +5,6 @@ export interface projectRequestData{
     description:string,
     team:number,
     active:boolean,
-    credentials:credentialsData,
 }
 
 export interface projectResponseData{
@@ -19,5 +18,4 @@ export interface projectResponseData{
 
 export interface contentRequestData{
     content:string
-    credentials:credentialsData
 }

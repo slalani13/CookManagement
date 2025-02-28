@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { EditProjectComponent } from '../edit-project/edit-project.component';
 import { Router } from '@angular/router';
 import { projectResponseData } from '../models/projectData';
+import { UserService } from '../user.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-project-component',
@@ -23,13 +25,17 @@ export class ProjectComponentComponent implements OnInit{
   @Input() active: boolean = false;
   @Input() project_data: projectResponseData|null = null;
 
+  user:User|null = null;
+
   editing_project:boolean = false;
   
-  constructor(private router: Router){
+  constructor(private router: Router, private userService:UserService){
 
   }
   ngOnInit(): void {
-  
+    this.userService.getUser().subscribe(user => {
+      this.user = user;
+    });
   }
 
   toProjectPage(){
