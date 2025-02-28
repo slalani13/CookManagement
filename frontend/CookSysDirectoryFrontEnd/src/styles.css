@@ -14,3 +14,11 @@ body {
 textarea:focus, input:focus {
   outline: none;
 }
+
+:root {
+  --background: #051622; 
+  --blue-text: #54A7A2;   
+  --gold: #E6BE8A;        
+  --dark-blue: #204863;   
+  --darker-blue: #0B2D45; 
+}

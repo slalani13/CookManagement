@@ -5,10 +5,11 @@ import { TeamCardComponent } from './team-card/team-card.component'
 import { CreateTeamComponent } from '../create-team/create-team.component';
 import { getAllTeams } from '../services/teamService'
 import { getProjectsFromTeam } from '../services/projectService';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-team',
-  imports: [CommonModule, NavbarComponent, TeamCardComponent, CreateTeamComponent],
+  imports: [CommonModule, NavbarComponent, TeamCardComponent, CreateTeamComponent, FormsModule],
   standalone:true,
   templateUrl: './team.component.html',
   styleUrl: './team.component.css'

@@ -1,6 +1,7 @@
 package com.cooksys.project_manager.mappers;
 
 import java.util.List;
+import java.util.Set;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -19,7 +20,7 @@ public interface UserMapper {
     @Mapping(target = "username", source = "credentials.username") // Explicitly map username
     UserResponseDto entityToResponseDto(User user);
 
-    List<FullUserDto> entitiesToDto(List<User> entities);
+    List<FullUserDto> entitiesToDto(Set<User> entities);
 
     List<User> dtosToEntities(List<UserRequestDto> users);
 

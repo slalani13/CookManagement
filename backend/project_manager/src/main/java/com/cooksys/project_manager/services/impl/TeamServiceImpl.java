@@ -98,11 +98,16 @@ public class TeamServiceImpl implements TeamService{
     @Override
     public TeamResponseDto createTeam(TeamRequestDto teamRequestDto) {
         //hasPermission(teamRequestDto.getCredentials());
-        Team newTeam = teamRepository.save(teamMapper.requestDtoToEntity(teamRequestDto));
-        newTeam.setName(teamRequestDto.getName());
-        newTeam.setDescription(teamRequestDto.getDescription());
-        newTeam.setCompany(teamRequestDto.getCompany());
-        return teamMapper.entityToResponseDto(teamRepository.save(newTeam));
+        // Team newTeam = teamRepository.save(teamMapper.requestDtoToEntity(teamRequestDto));
+        // newTeam.setName(teamRequestDto.getName());
+        // newTeam.setDescription(teamRequestDto.getDescription());
+        // newTeam.setCompany(teamRequestDto.getCompany());
+        // return teamMapper.entityToResponseDto(teamRepository.save(newTeam));
+
+        Long companyId = teamRequestDto.getCompany();
+        Team team = teamMapper.requestDtoToEntity(teamRequestDto);
+        team.setCompany(companyId);
+        return teamMapper.entityToResponseDto(teamRepository.saveAndFlush(team));
     }
 
     @Override
