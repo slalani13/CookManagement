@@ -1,4 +1,4 @@
-<div class="bg-gray-900 text-white shadow-lg rounded-xl p-4 border border-gray-700 w-full flex justify-between items-center">
+<div class="hover:bg-black bg-gray-900 text-white shadow-lg rounded-xl p-4 border border-gray-700 w-full flex justify-between items-center">
     <div class="text-left">
         <h2 class="text-xl text-white">{{ name }}</h2>
         <p [ngClass]="{'text-green-400': active, 'text-red-400': !active}" class="text-sm font-medium">
@@ -8,11 +8,11 @@
     </div>
     
     <div class="flex gap-4">
-        <button (click)="toProjectPage()" class="px-4 py-2 bg-yellow-200 text-black rounded-lg hover:bg-yellow-400">
+        <button (click)="toProjectPage()" class="hover:animate-pulse px-4 py-2 bg-yellow-200 text-black rounded-lg hover:bg-yellow-400">
             Details
         </button>
 
-        <button *ngIf="user?.admin" (click)="setEditing()" class="px-4 py-2 bg-yellow-200 text-black rounded-lg hover:bg-yellow-400">
+        <button *ngIf="user?.admin" (click)="setEditing()" class="hover:animate-pulse px-4 py-2 bg-yellow-200 text-black rounded-lg hover:bg-yellow-400">
             Edit
         </button>
     </div>
