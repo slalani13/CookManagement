@@ -4,9 +4,8 @@
 <br>
 <div class="teams-page-container flex flex-col justify-center items-center w-full py-5 mt-10">
     <h1 class="text-6xl font-bold">Teams</h1>
-    <div class="teams-container grid grid-cols-3 gap-5 justify-between w-4/5">
-        <app-team-card *ngFor="let team of teams; let i = index" [team]="team" [project]="projects[i]">
-
+    <div class="teams-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center w-full px-4 md:w-4/5">
+        <app-team-card *ngFor="let team of teams; let i = index" [team]="team" [project]="projects[i]" class="w-full max-w-xs">
         </app-team-card>
         <div class="new-team-container cursor-pointer felx flex-col items-center justify-center  
                         flex-1 m-5 w-80 h-64 box-border rounded-2xl border-2 border-beige bg-transparent text-beige font-normal 
