@@ -7,11 +7,11 @@
     <div class="teams-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center w-full px-4 md:w-4/5">
         <app-team-card *ngFor="let team of teams; let i = index" [team]="team" [project]="projects[i]" class="w-full max-w-xs">
         </app-team-card>
-        <div class="new-team-container cursor-pointer felx flex-col items-center justify-center  
-                        flex-1 m-5 w-80 h-64 box-border rounded-2xl border-2 border-beige bg-transparent text-beige font-normal 
+        <div class="new-team-container cursor-pointer flex flex-col items-center justify-center  
+                        w-full max-w-xs h-64 box-border rounded-2xl border-2 border-beige bg-transparent text-beige font-normal 
                         leading-none shadow-md hover:bg-opacity-15 hover:bg-indigo-900" (click)="toggleOverlay()">
             <span class="plus">+</span>
-            <div class="text-3xl text-[#54A7A2]">New Team</div>
+            <div class="text-sm sm:text-2xl md:text-3xl text-[#54A7A2] text-center px-4 sm:px-2">New Team</div>
         </div>
     </div>
 </div>
