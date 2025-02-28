@@ -3,15 +3,10 @@ package com.cooksys.project_manager.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import com.cooksys.project_manager.dtos.*;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.project_manager.services.CompanyService;
-import com.cooksys.project_manager.dtos.AnnouncementResponseDto;
-import com.cooksys.project_manager.dtos.CompanyRequestDto;
-import com.cooksys.project_manager.dtos.CompanyResponseDto;
-import com.cooksys.project_manager.dtos.FullUserDto;
-import com.cooksys.project_manager.dtos.TeamRequestDto;
-import com.cooksys.project_manager.dtos.UserResponseDto;
 import com.cooksys.project_manager.entities.Company;
 import com.cooksys.project_manager.entities.Team;
 import com.cooksys.project_manager.entities.User;
@@ -107,6 +102,33 @@ public class CompanyServiceImpl implements CompanyService{
         return companyMapper.entityToDto(companyRepository.saveAndFlush(companyToUpdate));
         
     }
+
+    @Override
+    public CompanyResponseDto addUserToCompany(Long companyId, CredentialsDto credentialsDto) {
+        if (credentialsDto == null || credentialsDto.getUsername() == null || credentialsDto.getPassword() == null) {
+            throw new IllegalArgumentException("Username and password cannot be null.");
+        }
+        Company company = validateCompanyId(companyId);
+        Optional<User> optionalUser = userRepository.findByCredentialsUsernameAndCredentialsPassword(
+                credentialsDto.getUsername(), credentialsDto.getPassword()
+        );
+        if (optionalUser.isEmpty()) {
+            throw new IllegalArgumentException("Credentials do not match any user in the database");
+        }
+        User user = optionalUser.get();
+        List<Company> companies = user.getCompanies();
+        companies.add(company);
+        user.setCompanies(companies);
+        userRepository.save(user);
+
+        List<User> users = company.getUsers();
+        users.add(user);
+        company.setUsers(users);
+        companyRepository.save(company);
+
+        return companyMapper.entityToDto(company);
+    }
+
 
     @Override
     public CompanyResponseDto deleteCompany(Long id) {

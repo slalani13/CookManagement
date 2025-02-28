@@ -122,7 +122,7 @@ export async function updateProjectContent(project_id:number, contentRequest:con
 
 export async function deleteProject(project_id:number){
     return fetchData({
-    endpoint: `${project_id}`,
+    endpoint: `projects/${project_id}`,
     method: "DELETE",
     }).then((response) => {
     if (response) {

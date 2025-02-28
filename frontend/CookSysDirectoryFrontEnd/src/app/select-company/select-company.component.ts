@@ -33,7 +33,6 @@ export class SelectCompanyComponent implements OnInit{
       });
   }
 
-
   onCompanySelect(event: Event): void {
     const selectedCompanyId = (event.target as HTMLSelectElement).value;
     console.log('Selected company ID:', selectedCompanyId);
