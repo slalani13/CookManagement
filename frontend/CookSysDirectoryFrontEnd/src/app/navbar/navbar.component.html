@@ -8,12 +8,12 @@
           {{ user?.admin ? 'Admin: ' + user?.profile?.firstName : user?.profile?.firstName }}
         </span>
       </div>
-      <div class="hidden md:flex space-x-10 text-[48px] font-mulish">
-        <a routerLink="/home" class="text-[#1BA098]">Home</a>
-        <a routerLink="/select-company" class="text-[#1BA098]">Company</a>
-        <a routerLink="/team" class="text-[#1BA098]">Team</a>
-        <a routerLink="/users" class="text-[#1BA098]">Users</a>
-        <a routerLink="/" (click)="handleLogout($event) "class="text-[#1BA098]">Logout</a>
+      <div class="hidden md:flex space-x-10 text-[24px] font-mulish">
+        <a routerLink="/home" class="text-gray-200">HOME</a>
+        <a routerLink="/select-company" class="text-gray-200">COMPANY</a>
+        <a routerLink="/team" class="text-gray-200">TEAM</a>
+        <a routerLink="/users" class="text-gray-200">USERS</a>
+        <a routerLink="/" (click)="handleLogout($event) "class="text-gray-200">LOGOUT</a>
       </div>
       <div class="md:hidden">
         <button id="menu-button" class="text-[#1BA098] focus:outline-none" (click)="toggleMenu()">
@@ -24,10 +24,10 @@
       </div>
     </div>
     <div id="menu" class="md:hidden flex flex-col mt-4 space-y-2" [class.hidden]="!showMenu">
-      <a routerLink="/home" class="text-[#1BA098] border-b-2 border-[#DEB992]">Home</a>
-      <a routerLink="/select-company" class="text-[#1BA098] border-b-2 border-[#DEB992]">Company</a>
-      <a routerLink="/team" class="text-[#1BA098] border-b-2 border-[#DEB992]">Team</a>
-      <a routerLink="/users" class="text-[#1BA098] border-b-2 border-[#DEB992]">Users</a>
-      <a routerLink="/" (click)="handleLogout($event)" class="text-[#1BA098] border-b-2 border-[#DEB992]">Logout</a>
+      <a routerLink="/home" class="text-gray-200 border-b-2 border-[#DEB992]">HOME</a>
+      <a routerLink="/select-company" class="text-gray-200 border-b-2 border-[#DEB992]">COMPANY</a>
+      <a routerLink="/team" class="text-gray-200 border-b-2 border-[#DEB992]">TEAM</a>
+      <a routerLink="/users" class="text-gray-200 border-b-2 border-[#DEB992]">USERS</a>
+      <a routerLink="/" (click)="handleLogout($event)" class="text-gray-200 border-b-2 border-[#DEB992]">LOGOUT</a>
     </div>
 </nav>
