@@ -34,8 +34,8 @@ export class EditProjectComponent {
   }
 
   editChosenProject(){
-    updateProject(this.project_id, {name: this.project_name, description: this.project_description, team:this.project_id, active:this.isActive,
-        credentials: {username:"jane_smith", password:"password" }}).then((data)=>{
+    updateProject(this.project_id, {name: this.project_name, description: this.project_description,
+       team:this.project_id, active:this.isActive}).then((data)=>{
       console.log(JSON.stringify(data)+" project edited successfully")
     }).then(() =>{
       this.active = false;

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs';
 import { User } from './models/user.model';
+import { UserRequest } from './models/userRequest';
 
 
 @Injectable({
@@ -40,5 +41,10 @@ export class UserService {
     this.userSource.next(user);
   }
 
+  createUser(userRequest: UserRequest) {
+    return this.http.post<any>('http://localhost:8080/users/', userRequest ).pipe(
+      tap(user => this.userSource.next(user))
+    )
+  }
 
 }

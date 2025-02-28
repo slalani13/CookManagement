@@ -2,6 +2,7 @@ package com.cooksys.project_manager.controllers;
 
 import java.util.List;
 
+import com.cooksys.project_manager.dtos.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cooksys.project_manager.dtos.AnnouncementResponseDto;
-import com.cooksys.project_manager.dtos.CompanyRequestDto;
-import com.cooksys.project_manager.dtos.CompanyResponseDto;
-import com.cooksys.project_manager.dtos.FullUserDto;
-import com.cooksys.project_manager.dtos.UserResponseDto;
 import com.cooksys.project_manager.services.CompanyService;
 
 import lombok.RequiredArgsConstructor;
@@ -53,6 +49,11 @@ public class CompanyController {
     @PatchMapping("/{id}")
     public CompanyResponseDto updateCompany(@PathVariable Long id, @RequestBody CompanyRequestDto companyRequestDto) {
         return companyService.updateCompany(id, companyRequestDto);
+    }
+
+    @PatchMapping("/{companyId}/add-user")
+    public CompanyResponseDto addUserToCompany(@PathVariable Long companyId, @RequestBody CredentialsDto credentialsDto) {
+        return companyService.addUserToCompany(companyId, credentialsDto);
     }
 
     @DeleteMapping("/{id}")

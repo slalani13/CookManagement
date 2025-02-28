@@ -6,6 +6,7 @@ import { User } from '../models/user.model';
 @Component({
   selector: 'app-navbar',
   imports: [RouterModule],
+  standalone: true,
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

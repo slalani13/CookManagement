@@ -120,12 +120,10 @@ export async function updateProjectContent(project_id:number, contentRequest:con
     })
 }
 
-export async function deleteProject(project_id:number, credentialsRequest: credentialsData){
+export async function deleteProject(project_id:number){
     return fetchData({
-    endpoint: `${project_id}`,
+    endpoint: `projects/${project_id}`,
     method: "DELETE",
-    body: JSON.stringify(credentialsRequest),
-    headers: {"Content-Type": "application/json"},
     }).then((response) => {
     if (response) {
         return response

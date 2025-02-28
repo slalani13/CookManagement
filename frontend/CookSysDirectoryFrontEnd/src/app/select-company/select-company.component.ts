@@ -33,28 +33,6 @@ export class SelectCompanyComponent implements OnInit{
       });
   }
 
-  // onCompanySelect(event: Event): void {
-  //   const selectedCompanyId = (event.target as HTMLSelectElement).value;
-  //   console.log('Selected company ID:', selectedCompanyId);
-
-  //   // Set the selected company ID in CompanyService
-  //   this.companyService.setSelectedCompanyId(Number(selectedCompanyId));
-
-  //   // Fetch company details
-  //   this.companyService.getCompanyById(Number(selectedCompanyId)).subscribe(company => {
-  //     this.selectedCompany = company;
-  //     console.log('Selected company details:', this.selectedCompany);
-  //     this.companyService.setCompany(company);
-  //   });
-
-  //   // Fetch announcements for the selected company
-  //   this.companyService.getAnnouncementsByCompanyId(Number(selectedCompanyId)).subscribe(announcements => {
-  //     this.announcements = announcements;
-  //     this.companyService.setAnnouncements(announcements);
-  //   });
-  //   this.router.navigate(['/home']);
-  // }
-
   onCompanySelect(event: Event): void {
     const selectedCompanyId = (event.target as HTMLSelectElement).value;
     console.log('Selected company ID:', selectedCompanyId);

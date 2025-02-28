@@ -37,8 +37,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     // must find an undeleted project with valid credentials and authority, else throws an error
-    private Project validateProjectWithId(Long project_id, CredentialsDto credentialsDto){
-        hasPermission(credentialsDto);
+    private Project validateProjectWithId(Long project_id){
+        //hasPermission(credentialsDto);
         Optional<Project> optionalProject = projectRepository.findByIdAndIsActiveTrue(project_id);
         if (!optionalProject.isPresent()){
             throw new BadRequestException(String.format("Project with id %d is does not exist or is inactive", project_id));
@@ -76,7 +76,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectResponseDto createProject(Long team_id, ProjectRequestDto projectRequestDto) {
-        hasPermission(projectRequestDto.getCredentials());
+        //hasPermission(projectRequestDto.getCredentials());
         Team currTeam = getTeamWithId(team_id);
         Project newProject = projectRepository.save(projectMapper.requestDtoToEntity(projectRequestDto));
         newProject.setActive(true);
@@ -91,7 +91,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectResponseDto updateProject(Long project_id, ProjectRequestDto projectRequestDto) {
         
-        hasPermission(projectRequestDto.getCredentials());
+        //asPermission(projectRequestDto.getCredentials());
         Project currProject = getProjectWithId(project_id);
 
         // checking individual fields if they are null, do not replace a non-null field with a null field'
@@ -121,8 +121,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public String fullyDeleteProject(Long project_id, CredentialsDto credentialsDto) {
-        Project currProject = validateProjectWithId(project_id, credentialsDto);
+    public String fullyDeleteProject(Long project_id) {
+        Project currProject = validateProjectWithId(project_id);
         Team currTeam = getTeamWithId(currProject.getTeam());
         currTeam.getProjects().remove(currProject);
         teamRepository.save(currTeam);
@@ -132,7 +132,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectResponseDto updateProjectContent(Long project_id, ContentRequestDto contentRequestDto) {
-        hasPermission(contentRequestDto.getCredentials());
+        //hasPermission(contentRequestDto.getCredentials());
         Project currProject = getProjectWithId(project_id);
 
         if (contentRequestDto.getContent() != null){

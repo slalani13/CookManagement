@@ -57,8 +57,8 @@ public class ProjectController {
     }
     
     @DeleteMapping("/{project_id}")
-    public String fullyDeleteProject(@PathVariable Long project_id, @RequestBody CredentialsDto credentialsDto) {                 
-        return projectService.fullyDeleteProject(project_id, credentialsDto);
+    public String fullyDeleteProject(@PathVariable Long project_id) {                 
+        return projectService.fullyDeleteProject(project_id);
     }
 
 }

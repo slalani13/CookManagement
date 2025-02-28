@@ -51,23 +51,23 @@ public class TeamController {
     }
 
     @PatchMapping("/{team_id}/add/{user_id}")
-    public TeamResponseDto addToTeam(@PathVariable Long team_id, @PathVariable Long user_id, @RequestBody CredentialsDto credentialsDto) {
-        return teamService.addToTeam(team_id, user_id, credentialsDto);
+    public TeamResponseDto addToTeam(@PathVariable Long team_id, @PathVariable Long user_id) {
+        return teamService.addToTeam(team_id, user_id);
     }
 
     @PatchMapping("/{team_id}/remove/{user_id}")
-    public TeamResponseDto removeFromTeam(@PathVariable Long team_id, @PathVariable Long user_id, @RequestBody CredentialsDto credentialsDto) {
-        return teamService.removeFromTeam(team_id, user_id, credentialsDto);
+    public TeamResponseDto removeFromTeam(@PathVariable Long team_id, @PathVariable Long user_id) {
+        return teamService.removeFromTeam(team_id, user_id);
     }
 
     @DeleteMapping("/{team_id}")
-    public String deleteTeam(@PathVariable Long team_id, @RequestBody CredentialsDto credentialsDto) {
-        return teamService.deleteTeam(team_id, credentialsDto);
+    public String deleteTeam(@PathVariable Long team_id) {
+        return teamService.deleteTeam(team_id);
     }
 
     @PostMapping("/{team_id}/restore")
-    public TeamResponseDto restoreTeam(@PathVariable Long team_id, @RequestBody CredentialsDto credentialsDto) {
-        return teamService.restoreTeam(team_id, credentialsDto);
+    public TeamResponseDto restoreTeam(@PathVariable Long team_id) {
+        return teamService.restoreTeam(team_id);
     }
 
 
