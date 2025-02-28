@@ -10,7 +10,7 @@
             </span>
         </p>
     </div>
-    <button (click)="setEditing()" class="px-4 py-2 bg-yellow-200 text-black rounded-lg hover:bg-yellow-400">
+    <button *ngIf="user?.admin"  (click)="setEditing()" class="px-4 py-2 bg-yellow-200 text-black rounded-lg hover:bg-yellow-400">
         Edit
     </button>
     </div>
@@ -20,7 +20,7 @@
             <h2 class="text-xl font-semibold">Project Content</h2>
             <div class="flex gap-2">
                 <button *ngIf="edit" (click)="doneEditing()" class="bg-black-500 border border-gray-300 text-white px-4 py-2 rounded hover:bg-blue-600">Done</button>
-                <button (click)="editMode()" class="bg-black-500 border border-gray-300 text-white px-4 py-2 rounded hover:bg-blue-600">Edit</button>
+                <button *ngIf="user?.admin"  (click)="editMode()" class="bg-black-500 border border-gray-300 text-white px-4 py-2 rounded hover:bg-blue-600">Edit</button>
             </div>
         </div>
 
@@ -31,13 +31,19 @@
         <ng-template #viewMode>
             <p class="mt-2 whitespace-pre-line">
                 <img src="/CookSysLogo.png" class="max-w-[200px] bg-white p-5 mb-5 h-auto object-contain" />
-                <ng-container *ngFor="let part of getContentParts(project.content)">
-                    <a *ngIf="isUrl(part)" [href]="part" target="_blank" class="text-blue-400 hover:underline break-all">
-                        {{ part }}
-                    </a>
-                    <span *ngIf="!isUrl(part)">{{ part }}</span>
+                <ng-container *ngIf="project.content; else noContent">
+                    <ng-container *ngFor="let part of getContentParts(project.content)">
+                        <a *ngIf="isUrl(part)" [href]="part" target="_blank" class="text-blue-400 hover:underline break-all">
+                            {{ part }}
+                        </a>
+                        <span *ngIf="!isUrl(part)">{{ part }}</span>
+                    </ng-container>
                 </ng-container>
             </p>
+        </ng-template>
+        
+        <ng-template #noContent>
+            <p class="text-gray-500 italic">There is no content</p>
         </ng-template>
     
 
